@@ -2,6 +2,7 @@
  ***      Copyright (C) 2016 - Hoa Nguyen, Paul Rosen        ***/
 
 /*** Running the code ***/
+DSPCP is built by using C++, OpenGL and Qt.
 To run this code, please follow two steps:
 
 Download Qt and Qt Creator software by visiting https://www.qt.io/download/
