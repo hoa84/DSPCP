@@ -1,0 +1,393 @@
+.if !'\*(.T'ps' .if !'\*(.T'html' .tm warning: eqn should have been given a `-T\*(.T' option
+.if '\*(.T'html' .if !'ps'ps' .tm warning: eqn should have been given a `-Tps' option
+.if '\*(.T'html' .if !'ps'ps' .tm warning: (it is advisable to invoke groff via: groff -Thtml -e)
+.lf 1 /usr/share/groff/1.18.1.1/tmac/eqnrc
+.\" Startup file for eqn.
+.EQ
+.nr 0C \n(.C
+.cp 0
+.ds 10
+.cp \n(0C
+.lf 63
+.EN
+.lf 1 cml_drl.manpage
+.TH cml_drl 1 "June 05, 2009" "cml_drl (Dr. L. Utilities) 0.2.466" "Dr. L. Utilities"
+.SH NAME
+\fBcml_drl\fR - Dimensionality Reduction
+.PD 2
+.SH VERSION
+.PD 1
+Version 0.2.466
+.PD 2
+.SH SYNOPSIS
+.PD 1
+.TP
+\fBcml_drl\fR input_matrix output_file [\fB-a\fR \fItrain_test_split\fR \fIrbm_iters\fR \fIbp_iters\fR \fIrbm_size\fR \fIbp_size\fR] [\fB-b\fR \fIrandom_seed\fR] [\fB-c\fR \fIconverge_num\fR] [\fB-d\fR \fIembedding_dimensionality\fR] [\fB-e\fR \fIeigentype\fR] [\fB-f\fR \fImap_file\fR] [\fB-g\fR] [\fB-h\fR] [\fB-i\fR \fImax_iters\fR] [\fB-k\fR \fInum_neighbors\fR] [\fB-l\fR \fIlandmark_type\fR \fIlandmark_value\fR] [\fB-m\fR \fIreduction_method\fR] [\fB-n\fR \fInotice_level\fR] [\fB-o\fR \fIlow_dim_file\fR \fIstats_file\fR] [\fB-p\fR \fIepsilon_distance\fR] [\fB-r\fR] [\fB-s\fR \fIstat_calculation\fR] [\fB-t\fR \fItest_file\fR] [\fB-u\fR] [\fB-v\fR] [\fB-w\fR \fIpymol_output\fR] [\fB-x\fR \fIdimensions\fR] [\fB-y\fR \fIneighbor_string\fR] [\fB-z\fR]
+.br
+.PD 2
+.SH DESCRIPTION
+.PD 1
+Perform dimensionality reduction on a set of coordinates using principal component analysis (PCA), multidimensional scaling (MDS) locally linear embedding (LLE), IsoMap, or an AutoEncoder (AE). The input file consis is a matrix (see matrix file formats below) with each row cooresponding to a data point. For MDS reduction, the input file is a symmetric distance matrix. An internal test matrix representing 400 samples from the 'swiss roll' can be used by specifying INT_SWISSROLL as the input file name. 5000 samples of the swissroll can be specified with INT_SWISSROLL5. Other internal test matrices are: INT_SWISSROLLN for textbook version of swiss roll, INT_THINSWISSROLL for thin swiss roll, INT_JAPAROLL for Japaness flag roll, INT_NONDEVROLL for Nondevelopable swiss roll, INT_TKNOT for trefoil knot, INT_SPHERE for a sphere, INT_TORUS for torus, and INT_BOX for the open box. (Add 5 at the end of string for 5000 samples). The output file uses an internal format that stores the map from the high\fB-d\fRimensional to the low\fB-d\fRimensional space and vice\fB-v\fRersa. Analysis can be performed without writing the map to disk by specifying NO_OUTPUT as the output file name. Once a map has been obtained, coordinates can be mapped back and forth using the \fB-f\fR flag. In this case, the input_file contains the coordinates in one dimension and the \fIoutput_file\fR contains the mapped coordinates.
+.PD 2
+.SH PARAMETERS
+.PD 1
+.TP
+\fB-a\fR \fItrain_test_split\fR \fIrbm_iters\fR \fIbp_iters\fR \fIrbm_size\fR \fIbp_size\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Set parameters for the autoencoder. \fItrain_test_split\fR is the fraction of input data to be used for training (default is 0.8). \fIrbm_iters\fR (default=10) and \fIbp_iters\fR (default=30) are the number of iterations to be used for restricted boltzmann and back propagation steps. \fIrbm_size\fR (default=10) and \fIbp_size\fR (default=100) is the desired batch size for RBM and BP steps. \fIrbm_size\fR and \fIbp_size\fR should evenly divide the training set size.
+.TP
+\fB-b\fR \fIrandom_seed\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Set the random number seed (ya_sizet integer value).
+.TP
+\fB-c\fR \fIconverge_num\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify convergence criteria for power method. This is given in terms of the cosine of the angle between eigen vectors in successive iterations. The default is 0 which results in the default epsilon depending on the matrix and method.
+.TP
+\fB-d\fR \fIembedding_dimensionality\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the number of dimension to project down to. The default is 2. For the AutoEncoder, all layers are specified in a string (\fB-d\fR "3 8 4 2"
+.TP
+\fB-e\fR \fIeigentype\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the type of eigen decomposition. Options are DQ, POWER, RRR, and SIMPLE. The default is RRR
+.TP
+\fB-f\fR \fImap_file\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Map from the high dimensional to the low dimensional space or vice versa using a previously calculated reduction as specified in \fImap_file\fR. The \fIinput_matrix\fR can contain multiple points, but the number of columns must match either the high or low dimensionality. For LLE and ISOMAP, the forward and reverse maps are calculated using an inverse distance weighted average of coordinates from neighbors of the high and low dimensionalities used in the original reduction. The number of neighbors used for the mapping is specified with the \fB-k\fR option. Reconstruction errors for the mapping can be calculated using the \fB-r\fR option.
+.TP
+\fB-g\fR
+If linked to the Intel math library, this will use the faster, low accuracy math functions.
+.TP
+\fB-h\fR
+Print out the man page for help
+.TP
+\fB-i\fR \fImax_iters\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the maximum number of iterations for iterative methods on each eigen vector. A warning is generated if any eigen vector does not converge within the specified number of iterations. The default is 10000.
+.TP
+\fB-k\fR \fInum_neighbors\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the number of neighbors to be used for methods which require k\fB-n\fRearest neighbors. The default is 10. If k<1, then we use it as epsilon distance for neighbors.
+.TP
+\fB-l\fR \fIlandmark_type\fR \fIlandmark_value\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Use landmark points for IsoMap reduction. If \fIlandmark_type\fR is FILE, \fIlandmark_value\fR specifies a file to load a matrix from (see file formats below). If \fIlandmark_type\fR is STRING, a string specification of landmarks is used (see \fB-x\fR for examples). If \fIlandmark_type\fR is RANDOM, a landmark value is a fraction>0 and <1 that specifies the random fraction of landmarks to be used. Landmarks are specified with 0 as the first point.
+.TP
+\fB-m\fR \fIreduction_method\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the dimensionality reduction method to be used. Options are PCA, MDS, LLE, ISOMAP, and AE. The default is PCA.
+.TP
+\fB-n\fR \fInotice_level\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Set the degree of program output.  Use: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR  0	No output
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 10	Normal program output
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 20	Parameters useful for reproducing the results
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 30	All output
+.TP
+\fB-o\fR \fIlow_dim_file\fR \fIstats_file\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Output the coordinates in the low dimensional space from the reduction to \fIlow_dim_file\fR in text format. Statistics are output to the file \fIstats_file\fR, also in text format.
+.TP
+\fB-p\fR \fIepsilon_distance\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify the epsilon distance for neighbors to be used for ISOMAP method.
+.TP
+\fB-r\fR
+Calculate the reconstruction error for the mapping specified with \fB-f\fR. If used with \fB-x\fR, the reconstruction error is calculated for each of the specified \fIdimensions\fR (note that the \fB-x\fR option cannot be used with the autoencoder). If this option is used during learning, the reconstruction error is calculated from the \fIinput_matrix\fR. For the autoencoder, this is the training set and the test set if the \fB-t\fR option is not specified. If the \fB-t\fR option is specified, it is the reconstruction error for the data used for training. For LLE and Isomap, the reconstruction error for the training data will always be 0 due to the mapping algorithm. Therefore it is advised to use a separate test set with these algorithms.
+.TP
+\fB-s\fR \fIstat_calculation\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Perform calculations on the statistics for a reduction. Options are NONE, DISTANCE, RECONSTRUCT and ALL. The default is NONE. The \fIdimensions\fR for which statistics are calculated is specified with \fB-x\fR
+.TP
+\fB-t\fR \fItest_file\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Specify explicitly the test set for autoencoder training. In this case no randomization of data occurs.
+.TP
+\fB-u\fR
+Perform calculations to estimate the intrinsic dimensionality using a variant of local PCA. In this case, PCA is performed on the manifold around each point using the nearest neighbors and the residual varience around each point is calculated. Statistics on the residual variance for each dimension are written to the output file. The top line is the mean residual variance. The next line is the minimum, followed by the maximum and the standard deviation for each dimension. If a single dimension is specified, either with \fB-d\fR or \fB-x\fR the output file consists of the residual variance around each datapoint. The time required for calculation will not change, even if fewer \fIdimensions\fR are specified. If \fB-z\fR is specified, the \fIoutput_file\fR is plotted.
+.TP
+\fB-v\fR
+For MDS, LLE, and IsoMap, the forward and reverse maps are obtained from a weighted average of the neighbors. By default, the weights are obtained from the inverse of the distances to the neighbors. If the \fB-v\fR flag is set, weights are obtained by solving a least\fB-s\fRquares problem as is perfromed in LLE.
+.TP
+\fB-w\fR \fIpymol_output\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Test output for pymol.
+.TP
+\fB-x\fR \fIdimensions\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Dimensions for which statistics should be calculated in matrix format. Examples are: \fB-x\fR "[0:3]" \fB-x\fR "[0:2:4]" \fB-x\fR "[0 1 5]". For eigenvalues, all \fIdimensions\fR are currently output regardless of the \fIdimensions\fR specified. Additionally, the \fIdimensions\fR specified with \fB-x\fR currently have no affect on autoencoder statistics.
+.TP
+\fB-y\fR \fIneighbor_string\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Do not do the reduction, but instead just generate statistics on the number of connected manifolds. Statistics are generated for each number of neighbors in \fIneighbor_string\fR (specified in the same manner as for \fB-x\fR).
+.TP
+\fB-z\fR
+Make plots with gnu plot.
+.PD 2
+.SH MATRIX FILE FORMATS
+.PD 1
+Five file formats are available for matrix and vector I/O depending on the type of matrix and format: full, symmetric, sparse, diagonal, pretty, and binary format.
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for the full matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMat \fI<rows> <columns>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col1>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col_n>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col2>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for a symmetric matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatSym \fI<rows>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col3>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+for the lower triangle. The format for a diagonal matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatDiag \fI<rows>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col3>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+for the diagonal. The format for a sparse matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatSparse \fI<rows> <columns>
+.PD 0
+.PP
+.PD 1
+\fI	<col_number*rows+row_number> <value>
+.PD 0
+.PP
+.PD 1
+\fI	<col_number*rows+row_number> <value>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+	END
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for a pretty file is:
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+\fI	<data row1, col1> <data row1, col2> ... <data row1,col_n>
+.PD 0
+.PP
+.PD 1
+\fI	<data row2, col1> <data row2, col2> ... <data row2,col_n>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+Binary files can also be loaded and saved, but are not architecture independent.
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+
+.PD 2
+.SH AUTHORS
+.PD 1
+W. Michael Brown, Shawn Martin, Haixia Jia, Jean-Paul Watson

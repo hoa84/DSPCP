@@ -1,0 +1,129 @@
+\hypertarget{class_y_a_p_c_a_reduce}{
+\section{YAPCAReduce$<$ eltype $>$ Class Template Reference}
+\label{class_y_a_p_c_a_reduce}\index{YAPCAReduce@{YAPCAReduce}}
+}
+Dimensionality reduction using principal component analysis.  
+
+
+{\tt \#include $<$ya\_\-pca\_\-reduce.h$>$}
+
+Inheritance diagram for YAPCAReduce$<$ eltype $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_y_a_p_c_a_reduce}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_p_c_a_reduce_a2}{
+const string \hyperlink{class_y_a_p_c_a_reduce_a2}{method\_\-name} () const }
+\label{class_y_a_p_c_a_reduce_a2}
+
+\begin{CompactList}\small\item\em Return the name of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a3}{
+const string \hyperlink{class_y_a_p_c_a_reduce_a3}{method\_\-id} () const }
+\label{class_y_a_p_c_a_reduce_a3}
+
+\begin{CompactList}\small\item\em Return the id of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a4}{
+const string \hyperlink{class_y_a_p_c_a_reduce_a4}{version} () const }
+\label{class_y_a_p_c_a_reduce_a4}
+
+\begin{CompactList}\small\item\em Return the version of the dimensionality reduction method. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2$>$ int \hyperlink{class_y_a_p_c_a_reduce_a5}{find\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a6}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_p_c_a_reduce_a6}{forward\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_p_c_a_reduce_a6}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a7}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_p_c_a_reduce_a7}{reverse\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_p_c_a_reduce_a7}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_p_c_a_reduce_a8}{find} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a9}{
+void \hyperlink{class_y_a_p_c_a_reduce_a9}{forward} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_p_c_a_reduce_a9}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a10}{
+void \hyperlink{class_y_a_p_c_a_reduce_a10}{reverse} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_p_c_a_reduce_a10}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void \hyperlink{class_y_a_p_c_a_reduce_a11}{reconstruct\_\-error} (const ya\_\-type1 \&input, const ya\_\-type2 \&output, const ya\_\-type3 \&dims, ya\_\-type4 \&rmsd)
+\begin{CompactList}\small\item\em Get the reconstruction errors for the given low dimensionalities. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a12}{
+void \hyperlink{class_y_a_p_c_a_reduce_a12}{save\_\-map} (ostream \&out) const }
+\label{class_y_a_p_c_a_reduce_a12}
+
+\begin{CompactList}\small\item\em Save a map to the given stream. \item\end{CompactList}\item 
+\hypertarget{class_y_a_p_c_a_reduce_a13}{
+int \hyperlink{class_y_a_p_c_a_reduce_a13}{load\_\-map} (istream \&in)}
+\label{class_y_a_p_c_a_reduce_a13}
+
+\begin{CompactList}\small\item\em Load a map from the given stream. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class eltype$>$ class YAPCAReduce$<$ eltype $>$}
+
+Dimensionality reduction using principal component analysis. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_y_a_p_c_a_reduce_a8}{
+\index{YAPCAReduce@{YAPCAReduce}!find@{find}}
+\index{find@{find}!YAPCAReduce@{YAPCAReduce}}
+\subsubsection[find]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_p_c_a_reduce}{YAPCAReduce}$<$ eltype $>$::find (const YA\_\-Mat\-T \& {\em input}, YA\_\-Mat\-T \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_y_a_p_c_a_reduce_a8}
+
+
+Find the map for reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+
+
+Implements \hyperlink{class_y_a_dim_reduce_a8}{YADim\-Reduce$<$ eltype $>$}.\hypertarget{class_y_a_p_c_a_reduce_a5}{
+\index{YAPCAReduce@{YAPCAReduce}!find_map@{find\_\-map}}
+\index{find_map@{find\_\-map}!YAPCAReduce@{YAPCAReduce}}
+\subsubsection[find\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2$>$ YALANAMESPACE int \hyperlink{class_y_a_p_c_a_reduce}{YAPCAReduce}$<$ eltype $>$::find\_\-map (const ya\_\-type1 \& {\em input}, ya\_\-type2 \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})}}
+\label{class_y_a_p_c_a_reduce_a5}
+
+
+Find the map for reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+\hypertarget{class_y_a_p_c_a_reduce_a11}{
+\index{YAPCAReduce@{YAPCAReduce}!reconstruct_error@{reconstruct\_\-error}}
+\index{reconstruct_error@{reconstruct\_\-error}!YAPCAReduce@{YAPCAReduce}}
+\subsubsection[reconstruct\_\-error]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void \hyperlink{class_y_a_p_c_a_reduce}{YAPCAReduce}$<$ eltype $>$::reconstruct\_\-error (const ya\_\-type1 \& {\em input}, const ya\_\-type2 \& {\em output}, const ya\_\-type3 \& {\em dims}, ya\_\-type4 \& {\em rmsd})}}
+\label{class_y_a_p_c_a_reduce_a11}
+
+
+Get the reconstruction errors for the given low dimensionalities. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]High dimensional coordinates \item[{\em output}]Low dimensional coordinates \item[{\em dims}]SORTED Dimensionalities to calculate the reconstruction errors \item[{\em rmsd}]Root mean squared deviations for reconstruction errors $\ast$ \end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+/tmp/drl/cpp/math/dimred/\hyperlink{ya__pca__reduce_8h}{ya\_\-pca\_\-reduce.h}\item 
+/tmp/drl/cpp/math/dimred/ya\_\-pca\_\-reduce.cpp\end{CompactItemize}

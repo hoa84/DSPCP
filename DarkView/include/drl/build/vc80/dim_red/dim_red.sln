@@ -1,0 +1,80 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "math\math.vcproj", "{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0} = {46468537-B1DD-48CA-A34D-8E8B969E8DF0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "all", "all\all.vcproj", "{46468537-B1DD-48CA-A34D-8E8B969E8DF0}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cml_drl", "cml_drl\cml_drl.vcproj", "{1DF250EF-3472-450D-AF27-5FF9B0C938C0}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0} = {46468537-B1DD-48CA-A34D-8E8B969E8DF0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vm_slice", "vm_slice\vm_slice.vcproj", "{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0} = {46468537-B1DD-48CA-A34D-8E8B969E8DF0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		IntelMKLDebug|Win32 = IntelMKLDebug|Win32
+		IntelMKLRelease|Win32 = IntelMKLRelease|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.Debug|Win32.Build.0 = Debug|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.IntelMKLDebug|Win32.ActiveCfg = IntelMKLDebug|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.IntelMKLDebug|Win32.Build.0 = IntelMKLDebug|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.IntelMKLRelease|Win32.ActiveCfg = IntelMKLRelease|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.IntelMKLRelease|Win32.Build.0 = IntelMKLRelease|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.Release|Win32.ActiveCfg = Release|Win32
+		{F4FDB7DC-4CF9-4BE6-95B9-AAA6DD6B960F}.Release|Win32.Build.0 = Release|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.Debug|Win32.Build.0 = Debug|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.IntelMKLDebug|Win32.ActiveCfg = IntelMKLDebug|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.IntelMKLDebug|Win32.Build.0 = IntelMKLDebug|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.IntelMKLRelease|Win32.ActiveCfg = IntelMKLRelease|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.IntelMKLRelease|Win32.Build.0 = IntelMKLRelease|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.Release|Win32.ActiveCfg = Release|Win32
+		{46468537-B1DD-48CA-A34D-8E8B969E8DF0}.Release|Win32.Build.0 = Release|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.Debug|Win32.Build.0 = Debug|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.IntelMKLDebug|Win32.ActiveCfg = IntelMKLDebug|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.IntelMKLDebug|Win32.Build.0 = IntelMKLDebug|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.IntelMKLRelease|Win32.ActiveCfg = IntelMKLRelease|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.IntelMKLRelease|Win32.Build.0 = IntelMKLRelease|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.Release|Win32.ActiveCfg = Release|Win32
+		{1DF250EF-3472-450D-AF27-5FF9B0C938C0}.Release|Win32.Build.0 = Release|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.Debug|Win32.Build.0 = Debug|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.IntelMKLDebug|Win32.ActiveCfg = IntelMKLDebug|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.IntelMKLDebug|Win32.Build.0 = IntelMKLDebug|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.IntelMKLRelease|Win32.ActiveCfg = Release|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.IntelMKLRelease|Win32.Build.0 = Release|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.Release|Win32.ActiveCfg = Release|Win32
+		{FDA3F8C8-232C-49C4-84F2-8F1B8A7D8247}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

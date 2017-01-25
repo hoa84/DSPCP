@@ -1,0 +1,167 @@
+\hypertarget{class_y_a_iso_reduce}{
+\section{YAIso\-Reduce$<$ eltype $>$ Class Template Reference}
+\label{class_y_a_iso_reduce}\index{YAIsoReduce@{YAIsoReduce}}
+}
+Dimensionality reduction using Iso\-Map.  
+
+
+{\tt \#include $<$ya\_\-iso\_\-reduce.h$>$}
+
+Inheritance diagram for YAIso\-Reduce$<$ eltype $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_y_a_iso_reduce}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_iso_reduce_a2}{
+const string \hyperlink{class_y_a_iso_reduce_a2}{method\_\-name} () const }
+\label{class_y_a_iso_reduce_a2}
+
+\begin{CompactList}\small\item\em Return the name of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a3}{
+const string \hyperlink{class_y_a_iso_reduce_a3}{method\_\-id} () const }
+\label{class_y_a_iso_reduce_a3}
+
+\begin{CompactList}\small\item\em Return the id of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a4}{
+const string \hyperlink{class_y_a_iso_reduce_a4}{version} () const }
+\label{class_y_a_iso_reduce_a4}
+
+\begin{CompactList}\small\item\em Return the version of the dimensionality reduction method. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2$>$ int \hyperlink{class_y_a_iso_reduce_a5}{find\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the reduction based on initial samples. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2, class ya\_\-type3$>$ int \hyperlink{class_y_a_iso_reduce_a6}{find\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts, ya\_\-type3 \&landmarks)
+\begin{CompactList}\small\item\em Find the reduction based on initial samples using landmarks. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a7}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_iso_reduce_a7}{forward\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_iso_reduce_a7}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a8}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_iso_reduce_a8}{reverse\_\-map} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_iso_reduce_a8}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_iso_reduce_a9}{find} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the reduction based on initial samples. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a10}{
+void \hyperlink{class_y_a_iso_reduce_a10}{forward} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_iso_reduce_a10}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a11}{
+void \hyperlink{class_y_a_iso_reduce_a11}{reverse} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_iso_reduce_a11}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a12}{
+void \hyperlink{class_y_a_iso_reduce_a12}{save\_\-map} (ostream \&out) const }
+\label{class_y_a_iso_reduce_a12}
+
+\begin{CompactList}\small\item\em Save a map to the given stream. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a13}{
+int \hyperlink{class_y_a_iso_reduce_a13}{load\_\-map} (istream \&in)}
+\label{class_y_a_iso_reduce_a13}
+
+\begin{CompactList}\small\item\em Load a map from the given stream. \item\end{CompactList}\item 
+\hypertarget{class_y_a_iso_reduce_a14}{
+const YA\_\-Mat\-T \& \hyperlink{class_y_a_iso_reduce_a14}{graph\_\-dists} ()}
+\label{class_y_a_iso_reduce_a14}
+
+\begin{CompactList}\small\item\em Returns the graph theoretical distance matrix. \item\end{CompactList}\item 
+template$<$class ya\_\-type1$>$ void \hyperlink{class_y_a_iso_reduce_a15}{component\_\-stat} (ya\_\-type1 \&m, const ya\_\-sizet num\_\-neighbors, YA\_\-Dyn\-I \&stats)
+\begin{CompactList}\small\item\em Find how many connected components and their sizes result from neighboring. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_iso_reduce_a16}{component\_\-stat} (ya\_\-type1 \&m, const ya\_\-sizet num\_\-neighbors, YA\_\-Dyn\-I \&stats, const ya\_\-type2 \&landmarks)
+\begin{CompactList}\small\item\em Find how many connected components and their sizes result from neighboring. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class eltype$>$ class YAIso\-Reduce$<$ eltype $>$}
+
+Dimensionality reduction using Iso\-Map. 
+
+This implements the Iso\-Map dimensionality reduction routine in:
+
+J. B. Tenenbaum, V. de Silva, and J. C. Langford, Science, 290, 2319 (2000). 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_y_a_iso_reduce_a16}{
+\index{YAIsoReduce@{YAIso\-Reduce}!component_stat@{component\_\-stat}}
+\index{component_stat@{component\_\-stat}!YAIsoReduce@{YAIso\-Reduce}}
+\subsubsection[component\_\-stat]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}$<$ eltype $>$::component\_\-stat (ya\_\-type1 \& {\em m}, const ya\_\-sizet {\em num\_\-neighbors}, YA\_\-Dyn\-I \& {\em stats}, const ya\_\-type2 \& {\em landmarks})}}
+\label{class_y_a_iso_reduce_a16}
+
+
+Find how many connected components and their sizes result from neighboring. 
+
+Same as \hyperlink{class_y_a_iso_reduce_a15}{component\_\-stat()} but landmarks can be specified. $\ast$ \hypertarget{class_y_a_iso_reduce_a15}{
+\index{YAIsoReduce@{YAIso\-Reduce}!component_stat@{component\_\-stat}}
+\index{component_stat@{component\_\-stat}!YAIsoReduce@{YAIso\-Reduce}}
+\subsubsection[component\_\-stat]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1$>$ void \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}$<$ eltype $>$::component\_\-stat (ya\_\-type1 \& {\em m}, const ya\_\-sizet {\em num\_\-neighbors}, YA\_\-Dyn\-I \& {\em stats})}}
+\label{class_y_a_iso_reduce_a15}
+
+
+Find how many connected components and their sizes result from neighboring. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em n}]x m input matrix for n datapoints with a dimensionality = m \item[{\em num\_\-neighbors}]number of neighbors to use for neighboring routine \item[{\em stat}]length C vector containing the sizes of the C connected components found during neighboring. $\ast$ \end{description}
+\end{Desc}
+\hypertarget{class_y_a_iso_reduce_a9}{
+\index{YAIsoReduce@{YAIso\-Reduce}!find@{find}}
+\index{find@{find}!YAIsoReduce@{YAIso\-Reduce}}
+\subsubsection[find]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}$<$ eltype $>$::find (const YA\_\-Mat\-T \& {\em input}, YA\_\-Mat\-T \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_y_a_iso_reduce_a9}
+
+
+Find the reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+
+
+Implements \hyperlink{class_y_a_dim_reduce_a8}{YADim\-Reduce$<$ eltype $>$}.\hypertarget{class_y_a_iso_reduce_a6}{
+\index{YAIsoReduce@{YAIso\-Reduce}!find_map@{find\_\-map}}
+\index{find_map@{find\_\-map}!YAIsoReduce@{YAIso\-Reduce}}
+\subsubsection[find\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2, class ya\_\-type3$>$ int \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}$<$ eltype $>$::find\_\-map (const ya\_\-type1 \& {\em input}, ya\_\-type2 \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts}, ya\_\-type3 \& {\em landmarks})}}
+\label{class_y_a_iso_reduce_a6}
+
+
+Find the reduction based on initial samples using landmarks. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial coordinates \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix \item[{\em landmarks}]Vector storing indices of landmark points in input \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Note:]if more than 1 connected manifold is found, landmarks will store the subset of landmarks in the connected manifold $\ast$ \end{Desc}
+\hypertarget{class_y_a_iso_reduce_a5}{
+\index{YAIsoReduce@{YAIso\-Reduce}!find_map@{find\_\-map}}
+\index{find_map@{find\_\-map}!YAIsoReduce@{YAIso\-Reduce}}
+\subsubsection[find\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2$>$ int \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}$<$ eltype $>$::find\_\-map (const ya\_\-type1 \& {\em input}, ya\_\-type2 \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})}}
+\label{class_y_a_iso_reduce_a5}
+
+
+Find the reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial coordinates \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+/tmp/drl/cpp/math/dimred/\hyperlink{ya__iso__reduce_8h}{ya\_\-iso\_\-reduce.h}\item 
+/tmp/drl/cpp/math/dimred/ya\_\-iso\_\-reduce.cpp\end{CompactItemize}

@@ -1,0 +1,434 @@
+\hypertarget{class_y_a_dim_reduce}{
+\section{YADim\-Reduce$<$ eltype $>$ Class Template Reference}
+\label{class_y_a_dim_reduce}\index{YADimReduce@{YADimReduce}}
+}
+General Base Class for Dimensionality Reduction.  
+
+
+{\tt \#include $<$ya\_\-dim\_\-reduce.h$>$}
+
+Inheritance diagram for YADim\-Reduce$<$ eltype $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.34132cm]{class_y_a_dim_reduce}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_dim_reduce_a2}{
+virtual const string \hyperlink{class_y_a_dim_reduce_a2}{method\_\-name} () const =0}
+\label{class_y_a_dim_reduce_a2}
+
+\begin{CompactList}\small\item\em Return the name of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a3}{
+virtual const string \hyperlink{class_y_a_dim_reduce_a3}{method\_\-id} () const =0}
+\label{class_y_a_dim_reduce_a3}
+
+\begin{CompactList}\small\item\em Return the string id of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a4}{
+virtual const string \hyperlink{class_y_a_dim_reduce_a4}{version} () const =0}
+\label{class_y_a_dim_reduce_a4}
+
+\begin{CompactList}\small\item\em Return the version of the dimensionality reduction method. \item\end{CompactList}\item 
+template$<$class ya\_\-type1, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce_a5}{find\_\-t} (const ya\_\-type1 \&input, ya\_\-type2 \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a6}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_dim_reduce_a6}{forward\_\-t} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_dim_reduce_a6}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a7}{
+template$<$class ya\_\-type1, class ya\_\-type2$>$ void \hyperlink{class_y_a_dim_reduce_a7}{reverse\_\-t} (const ya\_\-type1 \&input, ya\_\-type2 \&output) const }
+\label{class_y_a_dim_reduce_a7}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+virtual int \hyperlink{class_y_a_dim_reduce_a8}{find} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)=0
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a9}{
+virtual void \hyperlink{class_y_a_dim_reduce_a9}{forward} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const =0}
+\label{class_y_a_dim_reduce_a9}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a10}{
+virtual void \hyperlink{class_y_a_dim_reduce_a10}{reverse} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const =0}
+\label{class_y_a_dim_reduce_a10}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+template$<$class ya\_\-type1$>$ eltype \hyperlink{class_y_a_dim_reduce_a11}{reconstruct\_\-error} (const ya\_\-type1 \&input) const 
+\begin{CompactList}\small\item\em RMSD representing the reconstruction error from the input matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a12}{
+int \hyperlink{class_y_a_dim_reduce_a12}{save\_\-map} (const string filename) const }
+\label{class_y_a_dim_reduce_a12}
+
+\begin{CompactList}\small\item\em Save dimensionality reduction map to the given file name. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a13}{
+virtual void \hyperlink{class_y_a_dim_reduce_a13}{save\_\-map} (ostream \&out) const =0}
+\label{class_y_a_dim_reduce_a13}
+
+\begin{CompactList}\small\item\em Save dimensionality reduction map to the given stream. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_dim_reduce_a14}{load\_\-map} (const string filename)
+\begin{CompactList}\small\item\em Load dimensionality reduction maps from the given file name. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a15}{
+virtual int \hyperlink{class_y_a_dim_reduce_a15}{load\_\-map} (istream \&in)=0}
+\label{class_y_a_dim_reduce_a15}
+
+\begin{CompactList}\small\item\em Save a map from the given stream. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_dim_reduce_a16}{verbose} ()
+\begin{CompactList}\small\item\em Return the degree of output to console by routines. \item\end{CompactList}\item 
+void \hyperlink{class_y_a_dim_reduce_a17}{verbose} (const int v)
+\begin{CompactList}\small\item\em Set the degree of output to console by routines. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a18}{
+ya\_\-sizet \hyperlink{class_y_a_dim_reduce_a18}{high\_\-dim} () const }
+\label{class_y_a_dim_reduce_a18}
+
+\begin{CompactList}\small\item\em Return the dimensionality for the high dimensional space. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a19}{
+ya\_\-sizet \hyperlink{class_y_a_dim_reduce_a19}{low\_\-dim} () const }
+\label{class_y_a_dim_reduce_a19}
+
+\begin{CompactList}\small\item\em Return the dimensionality for the low dimensional space. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a20}{
+const YA\_\-Vec\-T \& \hyperlink{class_y_a_dim_reduce_a20}{eigenvalues} () const }
+\label{class_y_a_dim_reduce_a20}
+
+\begin{CompactList}\small\item\em Return the vector of eigen values obtained for map. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a21}{
+ya\_\-sizet \hyperlink{class_y_a_dim_reduce_a21}{neighbors} () const }
+\label{class_y_a_dim_reduce_a21}
+
+\begin{CompactList}\small\item\em Get the number of neighbors for LLE and Iso\-Map. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a22}{
+void \hyperlink{class_y_a_dim_reduce_a22}{neighbors} (ya\_\-sizet n)}
+\label{class_y_a_dim_reduce_a22}
+
+\begin{CompactList}\small\item\em Set the number of neighbors for LLE and Iso\-Map and use nearest neighbors. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a23}{
+eltype \hyperlink{class_y_a_dim_reduce_a23}{epsilon} () const }
+\label{class_y_a_dim_reduce_a23}
+
+\begin{CompactList}\small\item\em Get the number of neighbors for LLE and Iso\-Map. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a24}{
+void \hyperlink{class_y_a_dim_reduce_a24}{epsilon} (eltype n)}
+\label{class_y_a_dim_reduce_a24}
+
+\begin{CompactList}\small\item\em Set the number of neighbors for LLE and Iso\-Map and use epsilon. \item\end{CompactList}\item 
+ya\_\-sizet \hyperlink{class_y_a_dim_reduce_a25}{neighbor\_\-mode} () const 
+\begin{CompactList}\small\item\em Get the method for obtaining neighbors for LLE and Iso\-Map. \item\end{CompactList}\item 
+void \hyperlink{class_y_a_dim_reduce_a26}{neighbor\_\-mode} (ya\_\-sizet n)
+\begin{CompactList}\small\item\em Set the method for obtaining neighbors for LLE and Iso\-Map. \item\end{CompactList}\item 
+ya\_\-sizet \hyperlink{class_y_a_dim_reduce_a27}{neighbor\_\-weight\_\-mode} () const 
+\begin{CompactList}\small\item\em Get the method for obtaining weights in nbors\_\-forward/nbors\_\-reverse. \item\end{CompactList}\item 
+void \hyperlink{class_y_a_dim_reduce_a28}{neighbor\_\-weight\_\-mode} (const ya\_\-sizet t)
+\begin{CompactList}\small\item\em Set the method for obtaining weights in nbors\_\-forward/nbors\_\-reverse. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a29}{
+template$<$class vm\_\-type$>$ void \hyperlink{class_y_a_dim_reduce_a29}{ae\_\-layers} (const vm\_\-type \&in)}
+\label{class_y_a_dim_reduce_a29}
+
+\begin{CompactList}\small\item\em Set the dimensionalities of the layers for the Auto\-Encoder. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a30}{
+const YA\_\-Mat\-T \& \hyperlink{class_y_a_dim_reduce_a30}{rbm\_\-errors} () const }
+\label{class_y_a_dim_reduce_a30}
+
+\begin{CompactList}\small\item\em Get the RBM errors from Auto\-Encoder training. \item\end{CompactList}\item 
+\hypertarget{class_y_a_dim_reduce_a31}{
+const YA\_\-Mat\-T \& \hyperlink{class_y_a_dim_reduce_a31}{bp\_\-errors} () const }
+\label{class_y_a_dim_reduce_a31}
+
+\begin{CompactList}\small\item\em Get the BP errors from Auto\-Encoder training. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce_a32}{nbors\_\-forward} (const vm\_\-type \&in, ya\_\-type2 \&out) const 
+\begin{CompactList}\small\item\em Perform forward map as a weighted average of k-neighbors. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce_a33}{nbors\_\-reverse} (const vm\_\-type \&in, ya\_\-type2 \&out) const 
+\begin{CompactList}\small\item\em Perform reverse map as a weighted average of k-neighbors. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce_a34}{nbors\_\-forward} (const vm\_\-type \&in, const ya\_\-sizet dim, ya\_\-type2 \&out) const 
+\begin{CompactList}\small\item\em Perform forward map using weighted average to dim smaller than lowdim. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce_a35}{nbors\_\-reverse} (const vm\_\-type \&in, const ya\_\-sizet dim, ya\_\-type2 \&out) const 
+\begin{CompactList}\small\item\em Perform reverse map using weighted average from smaller than lowdim. \item\end{CompactList}\item 
+template$<$class mat\_\-type$>$ void \hyperlink{class_y_a_dim_reduce_a36}{double\_\-center} (YA\_\-Base\-T \&mat)
+\begin{CompactList}\small\item\em Double center a matrix. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Protected Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_dim_reduce_b0}{
+template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void {\bf lle\_\-weights} (const vm\_\-type \&input, const ya\_\-type2 \&kinput, const ya\_\-sizet k, ya\_\-type3 \&neighbors, ya\_\-type4 \&weights, const bool samemat) const }
+\label{class_y_a_dim_reduce_b0}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_b1}{
+template$<$class vm\_\-type, class ya\_\-type2$>$ void {\bf lle\_\-weightse} (const vm\_\-type \&input, const ya\_\-type2 \&kinput, const eltype epsilon, vector$<$ YA\_\-Dyn\-I $>$ \&neighbors, vector$<$ YA\_\-Dyn\-T $>$ \&weights, const bool samemat) const }
+\label{class_y_a_dim_reduce_b1}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_b2}{
+template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void {\bf dist\_\-weights} (const vm\_\-type \&input, const ya\_\-type2 \&kinput, const ya\_\-sizet k, ya\_\-type3 \&neighbors, ya\_\-type4 \&weights) const }
+\label{class_y_a_dim_reduce_b2}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_b3}{
+template$<$class vm\_\-type, class ya\_\-type2$>$ void {\bf dist\_\-weightse} (const vm\_\-type \&input, const ya\_\-type2 \&kinput, const eltype epsilon, vector$<$ YA\_\-Dyn\-I $>$ \&nbors, vector$<$ YA\_\-Dyn\-T $>$ \&weights) const }
+\label{class_y_a_dim_reduce_b3}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_b4}{
+void {\bf write\_\-header} (ostream \&out) const }
+\label{class_y_a_dim_reduce_b4}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_b5}{
+int {\bf read\_\-header} (istream \&in)}
+\label{class_y_a_dim_reduce_b5}
+
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_dim_reduce_p0}{
+ya\_\-sizet {\bf \_\-high\_\-dim}}
+\label{class_y_a_dim_reduce_p0}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p1}{
+ya\_\-sizet {\bf \_\-low\_\-dim}}
+\label{class_y_a_dim_reduce_p1}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p2}{
+YA\_\-Vec\-T {\bf eigen\_\-values}}
+\label{class_y_a_dim_reduce_p2}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p3}{
+ya\_\-sizet {\bf num\_\-neighbors}}
+\label{class_y_a_dim_reduce_p3}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p4}{
+eltype {\bf \_\-epsilon}}
+\label{class_y_a_dim_reduce_p4}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p5}{
+ya\_\-sizet {\bf \_\-neighbor\_\-mode}}
+\label{class_y_a_dim_reduce_p5}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p6}{
+ya\_\-sizet {\bf \_\-neighbor\_\-weight\_\-mode}}
+\label{class_y_a_dim_reduce_p6}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p7}{
+YA\_\-Row\-I {\bf ate\_\-layers}}
+\label{class_y_a_dim_reduce_p7}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p8}{
+YA\_\-Mat\-T {\bf rbm\_\-error}}
+\label{class_y_a_dim_reduce_p8}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p9}{
+YA\_\-Mat\-T {\bf bp\_\-error}}
+\label{class_y_a_dim_reduce_p9}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p10}{
+YA\_\-Mat\-T {\bf input\_\-coords}}
+\label{class_y_a_dim_reduce_p10}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p11}{
+YA\_\-Mat\-T {\bf output\_\-coords}}
+\label{class_y_a_dim_reduce_p11}
+
+\item 
+\hypertarget{class_y_a_dim_reduce_p12}{
+int {\bf \_\-verbose}}
+\label{class_y_a_dim_reduce_p12}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class eltype$>$ class YADim\-Reduce$<$ eltype $>$}
+
+General Base Class for Dimensionality Reduction. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_y_a_dim_reduce_a36}{
+\index{YADimReduce@{YADim\-Reduce}!double_center@{double\_\-center}}
+\index{double_center@{double\_\-center}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[double\_\-center]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class mat\_\-type$>$ void \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::double\_\-center (YA\_\-Base\-T \& {\em mat})}}
+\label{class_y_a_dim_reduce_a36}
+
+
+Double center a matrix. 
+
+Center the matrix by substracting the mean of each column, row, adding the overall mean, and multiplying by -0.5 $\ast$ \hypertarget{class_y_a_dim_reduce_a8}{
+\index{YADimReduce@{YADim\-Reduce}!find@{find}}
+\index{find@{find}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[find]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ virtual int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::find (const YA\_\-Mat\-T \& {\em input}, YA\_\-Mat\-T \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_y_a_dim_reduce_a8}
+
+
+Find the map for reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal mapping of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+
+
+Implemented in \hyperlink{class_y_a_a_t_e_reduce_a5}{YAATEReduce$<$ eltype $>$}, \hyperlink{class_y_a_iso_reduce_a9}{YAIso\-Reduce$<$ eltype $>$}, \hyperlink{class_y_a_l_l_e_reduce_a8}{YALLEReduce$<$ eltype $>$}, \hyperlink{class_y_a_m_d_s_reduce_a8}{YAMDSReduce$<$ eltype $>$}, and \hyperlink{class_y_a_p_c_a_reduce_a8}{YAPCAReduce$<$ eltype $>$}.\hypertarget{class_y_a_dim_reduce_a5}{
+\index{YADimReduce@{YADim\-Reduce}!find_t@{find\_\-t}}
+\index{find_t@{find\_\-t}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[find\_\-t]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::find\_\-t (const ya\_\-type1 \& {\em input}, ya\_\-type2 \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a5}
+
+
+Find the map for reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal mapping of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+\hypertarget{class_y_a_dim_reduce_a14}{
+\index{YADimReduce@{YADim\-Reduce}!load_map@{load\_\-map}}
+\index{load_map@{load\_\-map}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[load\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::load\_\-map (const string {\em filename})}}
+\label{class_y_a_dim_reduce_a14}
+
+
+Load dimensionality reduction maps from the given file name. 
+
+Can generate the following errors:\begin{itemize}
+\item 310/10 Improperly formatted reduction file\end{itemize}
+
+
+311/10 Reduction method does not match object type\begin{itemize}
+\item 312/4 Version does not match current version $\ast$ \end{itemize}
+\hypertarget{class_y_a_dim_reduce_a34}{
+\index{YADimReduce@{YADim\-Reduce}!nbors_forward@{nbors\_\-forward}}
+\index{nbors_forward@{nbors\_\-forward}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[nbors\_\-forward]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::nbors\_\-forward (const vm\_\-type \& {\em in}, const ya\_\-sizet {\em dim}, ya\_\-type2 \& {\em out}) const}}
+\label{class_y_a_dim_reduce_a34}
+
+
+Perform forward map using weighted average to dim smaller than lowdim. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_dim_reduce_a32}{nbors\_\-forward} $\ast$ \end{Desc}
+\hypertarget{class_y_a_dim_reduce_a32}{
+\index{YADimReduce@{YADim\-Reduce}!nbors_forward@{nbors\_\-forward}}
+\index{nbors_forward@{nbors\_\-forward}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[nbors\_\-forward]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::nbors\_\-forward (const vm\_\-type \& {\em in}, ya\_\-type2 \& {\em out}) const}}
+\label{class_y_a_dim_reduce_a32}
+
+
+Perform forward map as a weighted average of k-neighbors. 
+
+The method used to determine the weights is set by \hyperlink{class_y_a_dim_reduce_a27}{neighbor\_\-weight\_\-mode()} \begin{Desc}
+\item[Note:]the number of neighbors used is determined by \hyperlink{class_y_a_dim_reduce_a21}{neighbors()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_dim_reduce_a35}{
+\index{YADimReduce@{YADim\-Reduce}!nbors_reverse@{nbors\_\-reverse}}
+\index{nbors_reverse@{nbors\_\-reverse}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[nbors\_\-reverse]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::nbors\_\-reverse (const vm\_\-type \& {\em in}, const ya\_\-sizet {\em dim}, ya\_\-type2 \& {\em out}) const}}
+\label{class_y_a_dim_reduce_a35}
+
+
+Perform reverse map using weighted average from smaller than lowdim. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_dim_reduce_a33}{nbors\_\-reverse()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_dim_reduce_a33}{
+\index{YADimReduce@{YADim\-Reduce}!nbors_reverse@{nbors\_\-reverse}}
+\index{nbors_reverse@{nbors\_\-reverse}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[nbors\_\-reverse]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::nbors\_\-reverse (const vm\_\-type \& {\em in}, ya\_\-type2 \& {\em out}) const}}
+\label{class_y_a_dim_reduce_a33}
+
+
+Perform reverse map as a weighted average of k-neighbors. 
+
+The method used to determine the weights is set by \hyperlink{class_y_a_dim_reduce_a27}{neighbor\_\-weight\_\-mode()} \begin{Desc}
+\item[Note:]the number of neighbors used is determined by \hyperlink{class_y_a_dim_reduce_a21}{neighbors()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_dim_reduce_a26}{
+\index{YADimReduce@{YADim\-Reduce}!neighbor_mode@{neighbor\_\-mode}}
+\index{neighbor_mode@{neighbor\_\-mode}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[neighbor\_\-mode]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ void \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::neighbor\_\-mode (ya\_\-sizet {\em n})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a26}
+
+
+Set the method for obtaining neighbors for LLE and Iso\-Map. 
+
+0 is nearest neighbors and 1 is epsilon The neighbor\_\-mode is automatically set accordingly when using \hyperlink{class_y_a_dim_reduce_a21}{neighbors()} or \hyperlink{class_y_a_dim_reduce_a23}{epsilon()} $\ast$ \hypertarget{class_y_a_dim_reduce_a25}{
+\index{YADimReduce@{YADim\-Reduce}!neighbor_mode@{neighbor\_\-mode}}
+\index{neighbor_mode@{neighbor\_\-mode}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[neighbor\_\-mode]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ ya\_\-sizet \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::neighbor\_\-mode () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a25}
+
+
+Get the method for obtaining neighbors for LLE and Iso\-Map. 
+
+0 is nearest neighbors and 1 is epsilon $\ast$ \hypertarget{class_y_a_dim_reduce_a28}{
+\index{YADimReduce@{YADim\-Reduce}!neighbor_weight_mode@{neighbor\_\-weight\_\-mode}}
+\index{neighbor_weight_mode@{neighbor\_\-weight\_\-mode}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[neighbor\_\-weight\_\-mode]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ void \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::neighbor\_\-weight\_\-mode (const ya\_\-sizet {\em t})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a28}
+
+
+Set the method for obtaining weights in nbors\_\-forward/nbors\_\-reverse. 
+
+\begin{itemize}
+\item 0 : The weights are set as 1/distance to each neighbor and scaled to sum to 1\begin{itemize}
+\item 1 : A least-squares problem is solved to optimize the weights as is performed in LLE \begin{Desc}
+\item[See also:]\hyperlink{class_y_a_dim_reduce_a27}{neighbor\_\-weight\_\-mode()}, \hyperlink{class_y_a_dim_reduce_a32}{nbors\_\-forward()}, \hyperlink{class_y_a_dim_reduce_a33}{nbors\_\-reverse()} $\ast$ \end{Desc}
+\end{itemize}
+\end{itemize}
+\hypertarget{class_y_a_dim_reduce_a27}{
+\index{YADimReduce@{YADim\-Reduce}!neighbor_weight_mode@{neighbor\_\-weight\_\-mode}}
+\index{neighbor_weight_mode@{neighbor\_\-weight\_\-mode}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[neighbor\_\-weight\_\-mode]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ ya\_\-sizet \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::neighbor\_\-weight\_\-mode () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a27}
+
+
+Get the method for obtaining weights in nbors\_\-forward/nbors\_\-reverse. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_dim_reduce_a27}{neighbor\_\-weight\_\-mode()}, \hyperlink{class_y_a_dim_reduce_a32}{nbors\_\-forward()}, \hyperlink{class_y_a_dim_reduce_a33}{nbors\_\-reverse()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_dim_reduce_a11}{
+\index{YADimReduce@{YADim\-Reduce}!reconstruct_error@{reconstruct\_\-error}}
+\index{reconstruct_error@{reconstruct\_\-error}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[reconstruct\_\-error]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class ya\_\-type1$>$ eltype \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::reconstruct\_\-error (const ya\_\-type1 \& {\em input}) const}}
+\label{class_y_a_dim_reduce_a11}
+
+
+RMSD representing the reconstruction error from the input matrix. 
+
+This is calculating by applying the forward map follwed by the reverse map. $\ast$ \hypertarget{class_y_a_dim_reduce_a17}{
+\index{YADimReduce@{YADim\-Reduce}!verbose@{verbose}}
+\index{verbose@{verbose}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[verbose]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ void \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::verbose (const int {\em v})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a17}
+
+
+Set the degree of output to console by routines. 
+
+0 is no output, 1 outputs a progress meter, 2 also output nbor stats $\ast$ \hypertarget{class_y_a_dim_reduce_a16}{
+\index{YADimReduce@{YADim\-Reduce}!verbose@{verbose}}
+\index{verbose@{verbose}!YADimReduce@{YADim\-Reduce}}
+\subsubsection[verbose]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}$<$ eltype $>$::verbose ()\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_dim_reduce_a16}
+
+
+Return the degree of output to console by routines. 
+
+0 is no output, 1 outputs a progress meter, 2 also output nbor stats $\ast$ 
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+/tmp/drl/cpp/math/dimred/\hyperlink{ya__dim__reduce_8h}{ya\_\-dim\_\-reduce.h}\item 
+/tmp/drl/cpp/math/dimred/ya\_\-dim\_\-reduce.cpp\end{CompactItemize}

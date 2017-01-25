@@ -1,0 +1,497 @@
+\hypertarget{index_intro}{}\section{Introduction}\label{index_intro}
+Dr. L. is a C++ library for dimensionality reduction. In the context of this library, dimensionality reduction is considered to consist of: \begin{enumerate}
+\end{enumerate}
+\begin{enumerate}
+\item Estimation of the intrinsic dimensionality using sampled data\item Finding maps that reduce the dimensionality of data (forward map) or increase the dimensionality of data (reverse map). The \char`\"{}find\char`\"{} is performed by optimizing some metric based on the sampled data. In the ideal case, applying the forward map followed by the reverse map should regenerate the original data points.\item Mapping arbitrary coordinates to high and low dimensionalities \end{enumerate}
+
+
+The library is intended to provide a consistent interface to multiple dimensionality reduction algorithms with an efficient C++ interface that runs efficiently on multicore architectures. A few routines have been optimized with an option for GPU acceleration or distributed computation.
+
+Currently, the library offers intrinsic dimensionality estimation using: \begin{enumerate}
+\end{enumerate}
+\begin{enumerate}
+\item point-PCA\item reconstruction error\item residual variance. \end{enumerate}
+
+
+The following dimensionality reduction methods have been implemented. \begin{enumerate}
+\end{enumerate}
+\begin{enumerate}
+\item Principal Component Analysis\item Multidimensional Scaling\item Locally Linear Embedding\item Iso\-Map\item Autoencoder Neural Networks \end{enumerate}
+
+
+An executable is also supplied that can be built to allow for command-line access to the library routines. A description of an application of the library for molecular structure analysis has been published \hyperlink{index_ref}{\mbox{[}Brown, 2009\mbox{]}}.
+
+\par
+ \par
+ \hypertarget{index_dimred}{}\section{Dimensionality Reduction}\label{index_dimred}
+In general, dimensionality reduction algorithms provide a method for taking a set of samples $\{\mathbf{x}_1, \dots, \mathbf{x}_n \} \subset \mathbb{R}^D$ and calculating a corresponding low-dimensional representation $\{\mathbf{y}_1, \dots, \mathbf{y}_n \} \subset \mathbb{R}^d$. Because dimensionality reduction is often used for visualization, some algorithms do not generate an explicit map from the high dimensional coordinates to the low dimensional representation. For many applications, however, it is desirable to have an explicit forward map, $\Phi(\mathbf{x}) : \mathbb{R}^D \rightarrow \mathbb{R}^d$, that gives the low-dimensional representation of an arbitrary point $\mathbf{x}$ and an explicit reverse map $\phi(\mathbf{y}) : \mathbb{R}^d \rightarrow \mathbb{R}^D$ that gives the high-dimensional represenation of an arbitrary point $\mathbf{y}$. This allows for mapping new samples that were not available at the time of the initial reduction and also provides a common metric for comparison of algorithms. Therefore, for the purposes of this work, we consider dimensionality reduction as the problem of generating $\Phi$ and $\phi$ from a training set of $n$ samples, $X_{D \times n} = (\mathbf{x}_1, \dots, \mathbf{x}_n )$. Because some methods do not generate explicit maps, we describe an approach for generating maps from a dimensionality reduction below.
+
+The performance of each algorithm can be evaluated using the reconstruction error. Ideally, a forward map of an arbitrary point followed by a reverse map will give the same point back. Typically, the reconstruction error is given by $\|\mathbf{x}-\phi(\Phi(\mathbf{x}))\|$.
+
+\par
+ \par
+ \hypertarget{index_ns}{}\section{Namespace}\label{index_ns}
+Although hidden from doxygen, the Dr. L. library resides in the {\em yala\/} namespace. You can access Dr. L. commands in your code with the following lines:
+
+
+
+\footnotesize\begin{verbatim}#include "dimred/ya_dimred.h"
+using namespace yala;
+\end{verbatim}
+\normalsize
+
+
+\par
+ \par
+ \hypertarget{index_vecmat}{}\section{Matrix and Vector Storage in Dr. L.}\label{index_vecmat}
+Dr. L. uses a custom linear algebra library for computations. To incorporate the library with your code, wrappers can be used for column-major or row-major matrices stored in traditional continuous memory arrays, STL vectors, or standard library valarrays. The wrapper used will depend on whether each datapoint is stored in a row or a column and whether or not the matrix is column major.
+
+
+
+\footnotesize\begin{verbatim}#include "dimred/ya_dimred.h"
+using namespace yala;
+
+int main(int argc, char **argv) {
+  int rows=4;
+  int cols=3;
+  int numel=rows*cols;
+  double input[numel];
+  
+  // Fill the matrix....
+  
+  // If each row is a datapoint (each column is a dimension)
+  // --If the matrix is column major
+  YA_WRAP(double) input_w(input,rows,cols);
+  // --If the matrix is row major
+  YA_WRAP_RM(double) input_w(input,rows,cols);
+  
+  // If each column is a datapoint (each row is a dimension)
+  // --If the matrix is column major
+  YA_WRAP_RM(double) input_w(input,cols,rows);
+  // --If the matrix is row major
+  YA_WRAP(double) input_w(input,cols,rows);
+
+  // Use input_w with Dr. L. routines...
+  // Same procedure can be used for output matrices.
+  
+  // Use input as usual...
+  
+  return 0;
+}
+\end{verbatim}
+\normalsize
+
+
+For single precision, double is replaced with float in the wrappers above, etc. For STL vectors:
+
+
+
+\footnotesize\begin{verbatim}  std::vector<double> input;
+  
+  ...
+  
+  
+  YA_VWRAP(double) input_w(input.begin(),rows,cols);
+  
+  // or
+  
+  YA_VWRAP_RM(double) input_w(input.begin(),rows,cols);
+\end{verbatim}
+\normalsize
+
+
+For valarray:
+
+
+
+\footnotesize\begin{verbatim}  std::valarray<double> input;
+  
+  ...
+  
+  YA_WRAP(double) input_w(&input[0],rows,cols);
+  
+  // or
+  
+  YA_WRAP_RM(double) input_w(&input[0],rows,cols);
+\end{verbatim}
+\normalsize
+
+
+\par
+ \par
+ \hypertarget{index_general}{}\section{General Dimensionality Reduction Routines}\label{index_general}
+Several general dimensionality reduction routines are available through the pure virtual class \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}. The base class can also be used for run-time selection of dimensionality routines:
+
+
+
+\footnotesize\begin{verbatim}  YADimReduce<double> *redmet=NULL;
+  
+  if (method_str=="PCA")
+    redmet=new YAPCAReduce<double>;
+  else if (method_str=="MDS")
+    redmet=new YAMDSReduce<double>;
+  else if (method_str=="LLE")
+    redmet=new YALLEReduce<double>;
+  else if (method_str=="ISOMAP")
+    redmet=new YAIsoReduce<double>;
+  else if (method_str=="AE")
+    redmet=new YAATEReduce<double>;
+\end{verbatim}
+\normalsize
+
+
+The following sample code describes some of the routines available through the base class:
+
+
+
+\footnotesize\begin{verbatim}  // Store the high dimensionality and low dimensionality for maps somewhere
+  int high_dim=5;
+  int low_dim=3;
+  
+  // For methods that utilize eigen decomposition, options are set through
+  // the EigenOptions class.
+  EigenOptions eigopts;
+  
+  // Set the degree of output to the console
+  // -- 0 is not output, 1 outputs a progress meter, 2 also outputs nbor stats
+  redmet->verbose(2);
+
+  // The find routine uses a set of input samples to obtain forward and reverse
+  // maps. Additionally, this routine will store the low-dimensional 
+  // representation for a set of samples in an output matrix. 
+  redmet->find_t(input, output, low_dim, eigopts);
+  
+  // Map in the forward direction to reduce the dimensionality of a matrix
+  redmet->forward_t(input_mat, output_mat);
+  
+  // Map in the reverse direction to increase the dimensionality of a matrix
+  redmet->reverse_t(input_mat, output_mat);
+  
+  // Calculate RMSD representing the reconstruction error from the input matrix
+  double err = redmet->reconstruct_error(input);  
+    
+  // Save dimensionality reduction maps to the given file name
+  int error_flag=redmet->save_map("example_maps.dat");
+  
+  // Load dimensionality reduction maps from the given file name
+  int error_flag=redmet->load_map("example_maps.dat");
+\end{verbatim}
+\normalsize
+
+
+For a list of additional routines, click on \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}.
+
+\par
+ \par
+ \hypertarget{index_nbors}{}\section{Neighbor Reconstruction Mapping}\label{index_nbors}
+LLE and Isomap produce a low-dimensional embedding $Y_{d \times n} = \{\mathbf{y}_1, \dots, \mathbf{y}_n \} \subset \mathbb{R}^d$ from the samples in $X$ without generating an explicit map. Here, we have considered dimensionality reduction as a problem of finding the maps $\Phi$ and $\phi$ from training data. For LLE and Isomap, we accomplish this with the maps $\Phi_{NRM}(X,Y,\mathbf{x})$ and $\phi_{NRM}(X,Y,\mathbf{y})$ that allow for dimensionality reduction to be performed on future samples based on the initial embedding of training data. A natural choice for these maps is some method that retains the positioning of a sample relative to its neighbors in the training set. Because LLE and Isomap assume that a sample and its neighbors are locally linear, we can perform the mapping using a linear combination of a sample's $k$ neighbors:
+
+\[ \Phi_{NRM}(X,Y,\mathbf{x})=\displaystyle\sum_{i=1}^k w_i\mathbf{y}_i \] and \[ \phi_{NRM}(X,Y,\mathbf{y})=\displaystyle\sum_{i=1}^k w_i\mathbf{x}_i. \]
+
+That is, the training set neighbors for an arbtrary point $\mathbf{x}$ or $\mathbf{y}$ can be identified in the input dimensionality and used to determine the sample mapping based on their positions ($\mathbf{x}_i$ or $\mathbf{y}_i$) in the desired dimensionality. The question is how to choose the weights $w_i$. The equations bear a strong resemblence to the reconstruction approach used in LLE and it has been suggested that this same approach can used to map new samples \hyperlink{index_ref}{\mbox{[}Saul, 2003\mbox{]}}. In this case, $w_i$ are determined in a least-squares optimization with a closed form solution. There are issues in implementing this approach, however. For the case when the number of neighbors $k$ is greater than the intrinsic dimensionality of the manifold, the solution for $w_i$ is not unique. Because it can be desirable that $k$ is variable and because the intrinsic dimensionality is not necessarily known {\em a\/} {\em priori\/}, it is not straightforward to decide when the problem must be conditioned to provide a unique solution. Therefore, although this approach is an option in Dr. L., a simpler alternative is the default. In this case, $w_i$ is chosen to be the inverse Euclidean distance between the sample and the neighbor $i$. This approach allows for an arbitrarily high number of neighbors, however, will clearly fail in the case when a sample is outside the convex hull of its neighbors (due to the constraint that $w_i$ is positive).
+
+When forward or reverse mapping is performed using a method that does not obtain explicit maps (e.g. LLE and Iso\-Map), neighbor reconstruction mapping (NRM) will be performed. In this case, the user has the choice to use LLE weights or distance weights (as described above). Additionally, either k-nearest neighbors or epsilon neighbors can be used:
+
+
+
+\footnotesize\begin{verbatim}  // Set the weights for reconstruction based on distances
+  // -- Alternatively, 1 can be specified to use LLE least-squares weighting.
+  redmet->neighbor_weight_mode(0);
+  
+  // If we are using k-nearest neighbors, specify k
+  int k=10;
+  redmet->neighbors(k);
+  
+  // If we are using a ball, specify epsilon
+  double eps=0.2;
+  redmet->epsilon(eps);
+  
+  // Specify that we are using k-nearest neighbors
+  // -- Alternatively, we could use 1 to specify epsilon neighbors
+  redmet->neighbor_mode(0);
+
+  // Perform a forward map
+  redmet->forward_t(input,output);
+\end{verbatim}
+\normalsize
+
+
+For details, see \hyperlink{class_y_a_dim_reduce}{YADim\-Reduce}.
+
+\par
+ \par
+ \hypertarget{index_pca}{}\section{Principal Component Analysis}\label{index_pca}
+PCA is a linear dimensionality reduction approach that has been widely applied to problems in almost every field of experimental science. The goal of PCA is to find a coordinate representation for data where the most variance is captured in the least number of coordinates. This representation can be found by performing an eigenvalue decomposition (or singular value decomposition) such that the resulting eigenvectors/singular vectors provide an orthonormal basis for the data while the eigenvalues/singular values provide information on the importance of each basis vector. Given the training set $X$, a row-centered matrix is calculated as $\widetilde{X}_{D \times n} = (\widetilde{\mathbf{x}}_1, \dots, \widetilde{\mathbf{x}}_n)$, where $\widetilde{\mathbf{x}}_i = \mathbf{x}_i - \mathbf{m}$ and $\mathbf{m}_{D \times 1}$ gives the row means. Eigen decomposition of the training set covariance matrix, $\frac{1}{n} \widetilde{X} \widetilde{X}^T$, is performed to give $U P U^T$. The forward map is then given by $\Phi_{PCA}(\mathbf{x})=\widehat{U}^T (\mathbf{x}-\mathbf{m})$, where $\widehat{U}_{d \times n}$ is the matrix composed of the first $d$ columns of $U$ corresponding to the eigenvectors with the largest eigenvalues. The reverse map is calculated as $\phi_{PCA}(\mathbf{y})=\widehat{U} \mathbf{y} + \mathbf{m}.$ The reconstruction error for PCA will be zero for $d>=D-z$, where $z$ is the number of non-zero eigenvalues in $P$. For details on the PCA routines, see \hyperlink{class_y_a_p_c_a_reduce}{YAPCAReduce}.
+
+\par
+ \par
+ \hypertarget{index_lle}{}\section{Locally Linear Embedding}\label{index_lle}
+Locally Linear Embedding (LLE) is a nonlinear dimensionality reduction method. LLE is performed by first solving for the location of each sample $\mathbf{x}_i$ in terms of its neighbors. For each sample, the neighbors are determined as all samples within a ball of specified radius centered on the sample or as the $k$ nearest neighbors. A weight matrix, $W$, is obtained by determining the weights in a linear combination of neighbors that best reconstruct each sample,
+
+\{eqnarray\} \{min\}\_\-W \& E(W) =  $\backslash$$|$ \{x\}\_\-i -  w\_\-\{ij\} \{x\}\_\-j $\backslash$$|$$^\wedge$2  $\backslash$ \{subject to\} \& $\backslash$\{ \{array\}\{l\} w\_\-\{ij\} = 0 \{ if \} \{x\}\_\-i \{ not neighbor \} \{x\}\_\-j$\backslash$  w\_\-\{ij\} = 1 \{ for every \} i, \{array\} . \}
+
+where $W = (w_{ij})$. This problem has a closed form solution and assures not only that each approximation $\mathbf{x}_i \approx \sum_j w_{ij} \mathbf{x}_j$ lies in the subspace spanned by the $k$ neighbors of $\mathbf{x}_i$, but also that the solution $W$ is invariant to translation, rotation, and rescaling. These properties allow, by design, calculation of a linear mapping that is also invariant to translation, rotation, and rescaling. This mapping from the $n$ data samples $\mathbf{x}_i$ to the low dimensional embedding $\mathbf{y}_i$ is performed by minimizing the embedding cost function,
+
+\[ \Gamma=\displaystyle\sum_{i=1}^n\|\mathbf{y}_i-\sum_{j=1}^n w_{ij}\mathbf{y}_j\|^2. \]
+
+In this case, the weights $w_{ij}$ are fixed and the low-dimensional coordinates are optimized. This is a quadratic minimization problem with a unique global minimum. It can be solved as a sparse $n \times n$ eigen value problem where the bottom $d$ non-zero eigenvectors provide the embedding (the bottom eigenvalue is zero). From this, it can be seen that LLE assumes that a sample and its neighbors can be treated in a linear fashion. Global structure is maintained due to the overlap of neighbors in each local patch in the embedding cost function. A detailed description of LLE can be found in \hyperlink{index_ref}{\mbox{[}Roweis, 2000\mbox{]}} and \hyperlink{index_ref}{\mbox{[}Saul, 2003\mbox{]}}.
+
+Because the low-dimensional representation is optimized directly, no explicit maps are generated. Here, we use $\Phi_{NRM}$ and $\phi_{NRM}$ to perform mapping in terms of the initial LLE reduction as described above. LLE is parameterized by the neighboring method (k\-NN or epsilon) and any options for eigen decomposition. These should be set before performing a find operation:
+
+
+
+\footnotesize\begin{verbatim}  // Use default eigen decomposition options
+  EigenOptions eigopts;
+
+  // If we are using k-nearest neighbors, specify k
+  int k=10;
+  redmet->neighbors(k);
+  
+  // If we are using a ball, specify epsilon
+  double eps=0.2;
+  redmet->epsilon(eps);
+  
+  // Specify that we are using k-nearest neighbors
+  // -- Alternatively, we could use 1 to specify epsilon neighbors
+  redmet->neighbor_mode(0);
+
+  // Set the dimensionality to reduce to
+  int low_dim=2;
+  
+  // Perform the reduction
+  redmet->find_t(input, output, low_dim, eigopts);
+\end{verbatim}
+\normalsize
+
+
+See \hyperlink{class_y_a_l_l_e_reduce}{YALLEReduce} for further details.
+
+\par
+ \par
+ \hypertarget{index_iso}{}\section{Iso\-Map}\label{index_iso}
+Isomap is a nonlinear dimensionality reduction algorithm, described in \hyperlink{index_ref}{\mbox{[}Tenenbaum, 2000\mbox{]}}. The first step in the Isomap algorithm is to impose a graph structure $G(V,E,W)$ on the input dataset $X$. Each sample $\mathbf{x}_i\in X$ is represented by a node $v_i \in V$ and two nodes $v_i$ and $v_j$ are connected by an edge $(v_i, v_j) \in E$ with weight $w_{ij} \in W$ if $\mathbf{x}_i$ is a a neighbor of $\mathbf{x}_j$. Neighbors are calculated in the same manner as perfromed in LLE. The weight of $w_{ij}$ is given by the Euclidean distance between $\mathbf{x}_i$ and $\mathbf{x}_j$. The second step in Isomap involves computation of the shortest paths between all nodes in $G$. These distances are stored pairwise in a matrix $D_{G}$. The distance matrix $D_{G}$ is intended to represent the distances between all samples on the manifold - the geodesic distances. Because these distances are Euclidean for each sample and its neighbors, Isomap makes the same assumption of local linearity as LLE. Unlike LLE, global distances between all neighbors are explicity calculated with the graph approximation to geodesic distances.
+
+Because all pairwaise distances are available, Multi-Dimensional Scaling (MDS) can be applied to $D_{G}$ to perform a low-dimensional embedding. MDS is a variant of PCA that starts with a distance matrix $D_G$, converts the distance matrix to an inner product matrix, and calculates the eigenvalue decomposition of the resulting matrix. For the case presented here, this is performed by squaring each element in the distance matrix $D_{G}$, double-centering the resulting matrix, and performing the eigenvalue decomposition to give $U P U^T$. The low-dimensional embedding is then given by $Y=\widehat{U} \widehat{P}$, where $\widehat{U}_{d \times n}$ is the matrix comprised by the first $d$ columns of $U$ corresponding to the eigenvectors with largest eigenvalues and $\widehat{P}_{d \times d}$ is the diagonal matrix containing the square roots of the largest $d$ eigenvalues.
+
+Like LLE, Isomap does not calculate explicit maps in order to perform an embedding. Here, we use $\Phi_{NRM}$ and $\phi_{NRM}$ to perform mapping in terms of the initial Isomap reduction as described above. Also like LLE, Iso\-Map is parameterized by the neighboring method (k\-NN or epsilon) and any options for eigen decomposition. These should be set before performing a find operation:
+
+
+
+\footnotesize\begin{verbatim}  // Use default eigen decomposition options
+  EigenOptions eigopts;
+
+  // If we are using k-nearest neighbors, specify k
+  int k=10;
+  redmet->neighbors(k);
+  
+  // If we are using a ball, specify epsilon
+  double eps=0.2;
+  redmet->epsilon(eps);
+  
+  // Specify that we are using k-nearest neighbors
+  // -- Alternatively, we could use 1 to specify epsilon neighbors
+  redmet->neighbor_mode(0);
+
+  // Set the dimensionality to reduce to
+  int low_dim=2;
+  
+  // Perform the reduction
+  redmet->find_t(input, output, low_dim, eigopts);
+\end{verbatim}
+\normalsize
+
+
+Iso\-Map relies on a graph constructed from each point and its neighbors and there is no guarantee that a single connected graph will result from the neighboring procedures. In the case where multiple connected components are found, dimensionality reduction is performed separately on each component. Future mappings using NRM based on this dimensionality reduction will map points into their nearest component. Statistics on the number and sizes of connected components using different neighboring criteria can be obtained with the \hyperlink{class_y_a_iso_reduce_a15}{YAIso\-Reduce::component\_\-stat()} routines.
+
+The runtime required for reduction with Iso\-Map can be reduced by using {\em landmark\/} points. In this case, a subset of points from the sampled data are chosen as landmark points that are used for computation of the distance matrix and for performing future mapping using NRM. In this case, a vector of indices for the landmarks is also supplied to the find routine (0 is first index). \mbox{[}For wrappers, the vector can be a row vector or a column vector.\mbox{]}
+
+
+
+\footnotesize\begin{verbatim}  YAIsoReduce redmet;
+  
+  ...
+  
+  redmet.findmap(input, output, low_dim, eigopts, landmarks);
+\end{verbatim}
+\normalsize
+
+
+For details on these and other routines provided, see \hyperlink{class_y_a_iso_reduce}{YAIso\-Reduce}.
+
+\par
+ \par
+ \hypertarget{index_ate}{}\section{Autoencoder Neural Network}\label{index_ate}
+An {\em autoencoder\/} performs dimensionality reduction via a bottleneck architecture neural network. Autoencoders were originally introduced sometime in the early 1990s, but they have not been widely applied due to the extreme difficulty of the optimization problem associated with training the resulting network. However, a method was recently proposed for pre-training an autoencoder neural network using a Restricted Boltzmann Machine (RBM) in order to accelerate the optimization process \hyperlink{index_ref}{\mbox{[}Hinton, 2006\mbox{]}}. This method was used to obtain impressive results on a very large benchmark dataset of hand written digits.
+
+The autoencoder introduced in \hyperlink{index_ref}{\mbox{[}Hinton, 2006\mbox{]}} consists of weighted sums and compositions of the well-known function $\sigma(x) = 1/(1+\exp(x))$. These functions are separated into distinct layers, with interconnections between functions in adjacent layers defining the network structure. At each layer in the network, inputs into the next layer consist of terms of the form $\sigma ( b_j + \sum_i v_i w_i )$, where $b_j$ represents a bias, $w_i$ represents a weight, and $v_i$ represents an input from the previous network layer. The inputs to the first layer are taken to be the components of the original vectors in our dataset $X = \{\mathbf{x}_1, \dots, \mathbf{x}_n \}$. The weights and biases are then optimized such that the mean reconstruction error $1/n \sum_i \|\mathbf{x}_i - \phi_{AE}(\Phi_{AE}(\mathbf{x}_i))\|$ is minimized (where $\Phi_{AE}$ is the forward map and $\phi_{AE}$ is the reverse map given by the network).
+
+To provide an illustrative example, suppose we have a dataset $X$ with native dimension 784, for which we want to construct a 2-dimensional embedding. We first define a network structure such as 784--1000--500--250--2, where the integers in the sequence represent the number of $\sigma$ functions in each layer. When appropriately trained, this structure will perform a reduction of 784-dimensional data to a 2-dimensional embedding. The justification for the initial increase in dimension to 1000 is that because the $\sigma$ functions are inherently binary, we may experience a loss of information when going from normalized data in $[0,1]$ to values in ${0,1}$; the possible loss of information resulting from this process is potentially counter-balanced by an initial increase in dimensionality. The encoding structure is then mirrored to form a 2--250--500--1000--784 decoding network structure. The encoder and decoder networks are then joined and training is performed on the aggregate network.
+
+As mentioned above, the optimization procedure for obtaining the autoencoder weights proceeds in two steps. In the first step, a RBM is trained. This training is performed for a user specified number of iterations. In the second step, the autoencoder weights are fine-tuned using back-propagation (BP). This step is also performed for a user specified number of iterations. In both cases a training set is used for the optimization and a test set is used to avoid overtraining. The training set is also split into batches to avoid overtraining, as well as to improve algorithm speed. During each iteration all of the batches are used in sequence.
+
+The layers of the neural network and corresponding weights yield an analytic expression for both the forward ($\Phi_{AE}$) and reverse ($\phi_{AE}$) maps that is optimized during training. This allows for future mapping of arbitrary points.
+
+When using the autoencoder, several additional commands must be executed before the find routine in order to parameterize the random number generator and the sizes for the layers. Additionally, many other parameters can be tuned for autoencoder training. The most important parameters are given in the example below.
+
+
+
+\footnotesize\begin{verbatim}  // Set up a random number generator and seed it
+  MathRandom<MathMersenneTwister> rng;
+  unsigned long seed=123456789;
+  rng.seed(seed);
+  
+  // Get a dimensionality reduction object
+  YAATEReduce redmet;
+  // Low dimensionality
+  int low_dim=4;
+  
+  // Tell redmet which random number generator to use.
+  redmet.set_rng(&rng);
+  // Give the layer sizes for the neural network
+  int layers[4]={35 64 32 4};
+  redmet.ae_layers(YA_WRAP(layers,1,4));
+  
+  // Fraction of the input matrix to be used for training
+  double trac=0.8;
+  redmet.train_split(tfrac);
+  
+  // Iterations of RBM and back-propagation
+  redmet.rbm_iters(10);
+  redmet.bp_iters(30);
+
+  // Number of samples in RBM batches and BP batches
+  redmet.rbm_size(10);
+  redmet.bp_size(100);
+  
+  ...
+\end{verbatim}
+\normalsize
+
+
+For additional routines, parameters, and test set specification, see \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}.
+
+\par
+ \par
+ \hypertarget{index_intrinsic}{}\section{Intrinsic Dimensionality Estimation}\label{index_intrinsic}
+Dimensionality reduction methods give an approach for obtaining a map $\Phi(\mathbf{x}) : \mathbb{R}^D \rightarrow \mathbb{R}^d$. In addition to having a method to calculate the maps, we must also determine an appropriate value for $d$. One obvious choice is to determine some metric for quantifying the success of dimensionality reduction and evaluate the reduction performance at different embedding dimensionalities. For PCA and MDS (Iso\-Map), this metric can be the residual variance. The eigenvalues obtained in these approaches give the variance in each dimension and therefore the sum of the $d+1$ to $D$ eigenvalues is a measure of the variance that is not accounted for in the reduction. When this value is near zero, little is gained from adding a dimension. Although LLE also solves an eigenproblem, the eigenvalues obtained have been shown to be unreliable in determining $d$ \hyperlink{index_ref}{\mbox{[}Saul, 2003\mbox{]}}.
+
+To obtain the eigenvalues from PCA, MDS, Iso\-Map, and LLE in Dr. L.:
+
+
+
+\footnotesize\begin{verbatim}  int high_dim=20;
+  int low_dim=3;
+  
+  ...
+  
+  redmet.find_t(input, output, low_dim, eigopts);
+  
+  double eigen_values[high_dim];
+  YA_WRAP(double) eig_w(eigen_values,1,20);
+  eig_w=redmet.eigenvalues();
+\end{verbatim}
+\normalsize
+
+
+An alternative metric utilized in Isomap \hyperlink{index_ref}{\mbox{[}Tenenbaum, 2009\mbox{]}} is a geodesic distance correlation residual given by $1-R^2(D_G,D_Y)$, where $R^2(D_G,D_Y)$ is the correlation coefficient between geodesic distances $D_G$ and distances in the low-dimensional space $D_Y$. This metric requires knowledge of the geodesic distances, however. For linear subspaces, the geodesic distances are given by the Euclidean distances. Otherwise, a method for estimating the geodesic distances, such as the one provided in Isomap, must be utilized.
+
+To evaluate the distance residual using, for example, Iso\-Map:
+
+
+
+\footnotesize\begin{verbatim}  int high_dim=20;
+  int low_dim=3;
+  
+  ...
+  
+  redmet.find_t(input,output,low_dim,eigopts);
+  
+  // Dimensionalities to calculate the distance statistics for:
+  int dimensionalities[3]={15, 10, 5}; 
+  // Correlation coefficient between geodesic distance and low-euclidean
+  double corrcoef[3];
+  // Coefficient of determination (R^2) between geodesic distances and low
+  double rsquared[3];
+  // Wrappers
+  YA_WRAP(int) wdim(dimensionalities,1,3);
+  YA_WRAP(double) wcorr(corrcoef,1,3);
+  YA_WRAP(double) wrsq(rsquared,1,3);
+  // Calculate the statistics and store in vectors
+  dist_residual(redmet.graph_dists(),output_matrix,dimensions,
+                corrcoeff,rsquared);
+                
+  // -- or if landmarks are used:
+  
+  dist_residual(redmet.graph_dists(),output_matrix,dimensions,
+                corrcoeff,rsquared,landmarks);  
+\end{verbatim}
+\normalsize
+
+
+For PCA and MDS, the distance residual can be evaluated between the input and output matrices used in the find calculation. For LLE and the autoencoder, the distance residual is of little value.
+
+As discussed earlier, a more general method that allows comparison between different algorithms is the reconstruction error \hyperlink{index_ref}{\mbox{[}Hinton, 2006\mbox{]}}. To calculate the reconstruction error using existing maps stored in redmet:
+
+
+
+\footnotesize\begin{verbatim}  double err=redmet.reconstruct_error(input);
+\end{verbatim}
+\normalsize
+
+
+Note that when using NRM for mapping (LLE, MDS, Iso\-Map), the reconstruction error for the samples used to obtain the maps will always be 0.
+
+The approaches listed above are often cited as methods for estimating the intrinsic dimensionality of a manifold. However, they all rely on dimensionality reduction methods that attempt an embedding of sample data in a space with lower dimensionality. Therefore, these approaches are really only suitable for estimating the smooth {\em embedding\/} {\em dimensionality\/}. This subtlety is important because the Whitney embedding theorem dictates that a smooth embedding of a $d$-manifold may require as many as $2d+1$ dimensions. Knowledge of the smooth embedding dimensionality is desirable for performing dimensionality reduction. For determining the {\em intrinsic\/} {\em dimensionality\/}, however, methods such as local-PCA might be more accurate for manifolds with complex structure. This is because they do not rely on a single-coordinate embedding of the entire manifold.
+
+Dr.L. provides a variant of local PCA, referred to as point PCA (see \hyperlink{index_ref}{\mbox{[}Brown, 2009\mbox{]}}) in order to estimate the intrinsic dimensionality. Taking the same approximations used in LLE and Isomap, we assume that a local region of a manifold given by a point and its nearest neighbors is approximately linear (local PCA differs from point PCA in that generalized clustering techniques such as vector quantization are used to determine locality). This assumption allows for estimation of intrinsic dimensionality by assessing the error in fitting each set of points to a lower-dimensional hyperplane. PCA can be utilized to perform this task; for a $d$-dimensional manifold, the residual variance should be near zero given an encoding with $d$ principal components. For example, in the case of a 2-dimensional manifold, the neighborhood of each point should reside on a 2-dimensional plane and therefore the variance in the data should be explained entirely by the first 2 principal components.
+
+For details on using point-PCA in Dr. L., see \hyperlink{ya__dim__redfun_8h_a0}{point\_\-pca()} for k-nearest neighbors and \hyperlink{ya__dim__redfun_8h_a2}{point\_\-pca\_\-ep()} for epsilon neighbors.
+
+\par
+ \par
+ \hypertarget{index_em}{}\section{Example Manifolds}\label{index_em}
+A variety of sample manifolds (all embedded in 3 dimensions), can be generated using Dr. L. as described in the file \hyperlink{ya__manifold__samples_8h}{ya\_\-manifold\_\-samples.h}. For example, to generate the japanese flag with 700 samples:
+
+
+
+\footnotesize\begin{verbatim}  #include "dimred/ya_manifold_samples.h"
+
+  int nS=700;
+  double manifold[nS*3];
+  int colors[nS];
+  YA_WRAP(double) wmanifold(manifold,nS,3);
+  
+  // Set up a random number generator and seed it
+  MathRandom<MathMersenneTwister> rng;
+  unsigned long seed=123456789;
+  rng.seed(seed);
+
+  // Fill the matrix with the samples
+  ya_manifold_japaneseflag(wmanifold,colors,nS,rng);
+\end{verbatim}
+\normalsize
+
+
+\par
+ \par
+ \hypertarget{index_advanced}{}\section{Advanced Use of Library}\label{index_advanced}
+For examples on more advanced use of the library, see the cml\_\-drl executable supplied with Dr.L.
+
+\par
+ \par
+ \hypertarget{index_ref}{}\section{References}\label{index_ref}
+Brown, W.M., Martin, S., Pollock, S.N., Coutsias, E.A., Watson, J.-P. {\bf  Algorithmic Dimensionality Reduction for Molecular Structure Analysis.} {\em Journal of Chemical Physics\/}. 2009. 130: p. 044901.
+
+Hinton, G.E., Salakhutdinov, R.R. {\bf Reducing the Dimensionality of Data with Neural Networks.} {\em Science\/}. 2006. 313: p.504-507.
+
+Roweis, S.T., Saul, L.K. {\bf  Nonlinear Dimensionality Reduction by Locally Linear Embedding.} {\em Science\/}. 2000. 290: p. 2323-2326.
+
+Saul, L. Roweis, S. {\bf Think Globally, Fit Locally: Unsupervised Learning of Low Dimensional Manifolds}. {\em Journal of Machine Learning Research\/}. 2003. 4: p.119-155.
+
+Tenenbaum, J.B., de Silva, V., Langfor, J.C. {\bf A Global Geometric Framework for Nonlinear Dimensionality Reduction.} {\em Science\/}. 2000. 290: p. 2319-2323.
+
+\par
+ \par
+ \par
+ \par
+ 

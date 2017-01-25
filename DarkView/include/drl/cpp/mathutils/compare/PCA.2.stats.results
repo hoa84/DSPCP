@@ -1,0 +1,9 @@
+Eigen_Values 2 1 
+20.2631 
+16.6493 
+Dimensions_DistCorr_DistR2 2 3
+1 0.617422 2.19301 
+2 0.30042 0.56486 
+Reconstruction_RMSD 2 2
+1 0.275565 
+2 0.185237 

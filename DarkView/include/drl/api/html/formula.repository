@@ -1,0 +1,72 @@
+\form#0:$\{\mathbf{x}_1, \dots, \mathbf{x}_n \} \subset \mathbb{R}^D$
+\form#1:$\{\mathbf{y}_1, \dots, \mathbf{y}_n \} \subset \mathbb{R}^d$
+\form#2:$\Phi(\mathbf{x}) : \mathbb{R}^D \rightarrow \mathbb{R}^d$
+\form#3:$\mathbf{x}$
+\form#4:$\phi(\mathbf{y}) : \mathbb{R}^d \rightarrow \mathbb{R}^D$
+\form#5:$\mathbf{y}$
+\form#6:$\Phi$
+\form#7:$\phi$
+\form#8:$n$
+\form#9:$X_{D \times n} = (\mathbf{x}_1, \dots, \mathbf{x}_n )$
+\form#10:$\|\mathbf{x}-\phi(\Phi(\mathbf{x}))\|$
+\form#11:$Y_{d \times n} = \{\mathbf{y}_1, \dots, \mathbf{y}_n \} \subset \mathbb{R}^d$
+\form#12:$X$
+\form#13:$\Phi_{NRM}(X,Y,\mathbf{x})$
+\form#14:$\phi_{NRM}(X,Y,\mathbf{y})$
+\form#15:$k$
+\form#16:\[ \Phi_{NRM}(X,Y,\mathbf{x})=\displaystyle\sum_{i=1}^k w_i\mathbf{y}_i \]
+\form#17:\[ \phi_{NRM}(X,Y,\mathbf{y})=\displaystyle\sum_{i=1}^k w_i\mathbf{x}_i. \]
+\form#18:$\mathbf{x}_i$
+\form#19:$\mathbf{y}_i$
+\form#20:$w_i$
+\form#21:$i$
+\form#22:$\widetilde{X}_{D \times n} = (\widetilde{\mathbf{x}}_1, \dots, \widetilde{\mathbf{x}}_n)$
+\form#23:$\widetilde{\mathbf{x}}_i = \mathbf{x}_i - \mathbf{m}$
+\form#24:$\mathbf{m}_{D \times 1}$
+\form#25:$\frac{1}{n} \widetilde{X} \widetilde{X}^T$
+\form#26:$U P U^T$
+\form#27:$\Phi_{PCA}(\mathbf{x})=\widehat{U}^T (\mathbf{x}-\mathbf{m})$
+\form#28:$\widehat{U}_{d \times n}$
+\form#29:$d$
+\form#30:$U$
+\form#31:$\phi_{PCA}(\mathbf{y})=\widehat{U} \mathbf{y} + \mathbf{m}.$
+\form#32:$d>=D-z$
+\form#33:$z$
+\form#34:$P$
+\form#35:$W$
+\form#36:$W = (w_{ij})$
+\form#37:$\mathbf{x}_i \approx \sum_j w_{ij} \mathbf{x}_j$
+\form#38:\[ \Gamma=\displaystyle\sum_{i=1}^n\|\mathbf{y}_i-\sum_{j=1}^n w_{ij}\mathbf{y}_j\|^2. \]
+\form#39:$w_{ij}$
+\form#40:$n \times n$
+\form#41:$\Phi_{NRM}$
+\form#42:$\phi_{NRM}$
+\form#43:$G(V,E,W)$
+\form#44:$\mathbf{x}_i\in X$
+\form#45:$v_i \in V$
+\form#46:$v_i$
+\form#47:$v_j$
+\form#48:$(v_i, v_j) \in E$
+\form#49:$w_{ij} \in W$
+\form#50:$\mathbf{x}_j$
+\form#51:$G$
+\form#52:$D_{G}$
+\form#53:$D_G$
+\form#54:$Y=\widehat{U} \widehat{P}$
+\form#55:$\widehat{P}_{d \times d}$
+\form#56:$\sigma(x) = 1/(1+\exp(x))$
+\form#57:$\sigma ( b_j + \sum_i v_i w_i )$
+\form#58:$b_j$
+\form#59:$X = \{\mathbf{x}_1, \dots, \mathbf{x}_n \}$
+\form#60:$1/n \sum_i \|\mathbf{x}_i - \phi_{AE}(\Phi_{AE}(\mathbf{x}_i))\|$
+\form#61:$\Phi_{AE}$
+\form#62:$\phi_{AE}$
+\form#63:$\sigma$
+\form#64:$[0,1]$
+\form#65:${0,1}$
+\form#66:$d+1$
+\form#67:$D$
+\form#68:$1-R^2(D_G,D_Y)$
+\form#69:$R^2(D_G,D_Y)$
+\form#70:$D_Y$
+\form#71:$2d+1$

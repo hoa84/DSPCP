@@ -1,0 +1,12 @@
+To compile...
+
+
+...with gnu (no openmp, no lapack/blas)
+g++ -O3 -DYA_PROGMETER -I../drl -o example example.cpp
+
+...with intel (line 1), openmp (line 2) and mkl blas library (line 3-4)
+icpc -ansi-alias -O2 -DYA_PROGMETER \
+     -openmp -DYA_OMP \
+     -DYA_BLAS -DYA_LAPACK -DYA_BLASMULT -I/opt/intel/mkl/10.0.3.020/include \
+     -L/opt/intel/mkl/10.0.3.020/lib/em64t/ -lmkl_lapack -lmkl -I../drl \
+     -o example example.cpp

@@ -1,0 +1,136 @@
+#***************************************************************************
+#                               Makefile
+#                          -------------------
+#
+#  _________________________________________________________________________
+#
+#  Configuration for Makefiles
+#
+#  _________________________________________________________________________
+#
+#    begin                : Thu Oct 22 2003
+#    copyright            : (C) 2003 by W. Michael Brown
+#    email                : wmbrown@sandia.gov
+# ***************************************************************************/
+
+#Compiler type
+COMPILER = gnu_fast
+#COMPILER = gnu_fast_atlas
+#COMPILER = intel_openmp
+#COMPILER = gnu_safe
+#COMPILER = gnu_safe_atlas
+#COMPILER = gnu_fast_cygwin
+#COMPILER = gnu_safe_cygwin
+#COMPILER = gnu4
+
+#CUDA (0 don't use GPU, 1 use GPU)
+USE_CUDA = 0
+
+
+###################### Test cases for Regression Testing
+#REGC COMPILER = r_gnu_fast
+#REGC COMPILER = r_gnu_fast_atlas
+#REGC COMPILER = r_intel_openmp
+#REGC COMPILER = r_gnu_safe
+#REGC COMPILER = r_gnu_safe_atlas
+#REGI include ../regression.mk
+
+#Locations of outside objects relative to a source directory
+HOBJ_DIR = ../../obj
+
+ALL_DIR = ../all
+ALL_LIB = $(HOBJ_DIR)/liball.a
+
+MATH_DIR = ../math
+MATH_LIB = $(HOBJ_DIR)/libmath.a
+
+CUDA_DIR = ../cuda
+CUDA_LIB = $(HOBJ_DIR)/libcuda.a
+
+EVERY_LIB = $(ALL_LIB)
+
+BIN_DIR = ../../bin/
+
+# Include directories
+INC         = -I$(ALL_DIR) -I$(MATH_DIR)
+
+# Set up CUDA parameterization
+ifeq ($(USE_CUDA),1)
+  CUDA      = /usr/local/cuda/bin/nvcc -I/usr/local/cuda/include -DUNIX -O3 -DDEBUG
+  CUDALNK   = -L/usr/local/cuda/lib -lcudart $(CUDA_LIB)
+  CUDACPP   = -DCUDA -I../cuda
+endif
+
+ifeq ($(COMPILER),intel_openmp)
+  CPP         = icpc -ansi-alias #-vec-report3
+  OPENMP      = -openmp -DVM_OMP
+  AR          = xiar
+  OPT         = -O2 -DPROGMETER -xT #-ipo -no-prec-div -static
+  CBLASF      = -DVMBLAS -DVMLAPACK -DVMBLAS_MULT -I/opt/intel/mkl/10.0.3.020/include
+  CBLAS       = -L/opt/intel/mkl/10.0.3.020/lib/em64t/ -lmkl_lapack -lmkl -liomp5 -lpthread
+#-DVMINTEL_VML
+endif
+
+ifeq ($(COMPILER),gnu_fast_atlas)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  OPT         = -O2 -DPROGMETER
+  CBLASF      = -DVMBLAS -DVMLAPACK -DVMBLAS_MULT
+  CBLAS       = -L/usr/local/atlas/lib -llapack -lptcblas -lptf77blas -latlas -ltmglib -lnsl -lg2c /usr/lib/gcc/x86_64-redhat-linux/4.1.1/libgfortran.a -lpthread
+endif
+
+ifeq ($(COMPILER),gnu_fast)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  OPT         = -O2 -DPROGMETER
+endif
+
+ifeq ($(COMPILER),gnu_safe_atlas)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  DBUG        = -g -DYA_DEBUG1 -DVMSAFE -Wall -pedantic #-ansi
+  OPT         = -O2 -DPROGMETER
+  CBLASF      = -DVMBLAS -DVMLAPACK -DVMBLAS_MULT
+  CBLAS       = -L/usr/local/atlas/lib -llapack -lptcblas -lptf77blas -latlas -ltmglib -lnsl -lg2c /usr/lib/gcc/x86_64-redhat-linux/4.1.1/libgfortran.a -lpthread
+endif
+
+ifeq ($(COMPILER),gnu_safe)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  DBUG        = -g -DYA_DEBUG1 -DVMSAFE -Wall -pedantic #-ansi
+  OPT         = -O2 -DPROGMETER
+endif
+
+ifeq ($(COMPILER),gnu_fast_cygwin)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  OPT         = -O2 -DPROGMETER
+  CBLASF = -DVMBLAS -DVMLAPACK -DVMBLAS_MULT
+  CBLAS =  -L/usr/local/atlas/lib -llapack -lptcblas -lptf77blas -latlas -ltmglib -lg2c -lpthread
+endif
+
+ifeq ($(COMPILER),gnu_safe_cygwin)
+  CPP         = g++
+  CC          = gcc
+  AR          = ar
+  DBUG        = -g -DYA_DEBUG1 -DVMSAFE -Wall -pedantic #-ansi
+  OPT         = -O2 -DPROGMETER
+  CBLASF = -DVMBLAS -DVMLAPACK -DVMBLAS_MULT
+  CBLAS =  -L/usr/local/atlas/lib -llapack -lptcblas -lptf77blas -latlas -ltmglib -lg2c -lpthread
+endif
+
+ifeq ($(COMPILER),gnu4)
+  CPP         = g++4
+  CC          = gcc4
+  AR          = ar
+  OPT         = -O2 -DPROGMETER
+endif
+
+CFLAGS        = $(CUDACPP) $(OPT) $(OPENMP) $(CBLASF) $(DBUG) $(INC) -c
+LFLAGS        = $(OPT) $(OPENMP)
+LLIBS         =

@@ -1,0 +1,286 @@
+.TH vm_slice 1 "June 05, 2009" "vm_slice (YALA Utilities) 0.2.466" "YALA Utilities"
+.SH NAME
+\fBvm_slice\fR - Perform matrix slicing
+.PD 2
+.SH VERSION
+.PD 1
+Version 0.2.466
+.PD 2
+.SH SYNOPSIS
+.PD 1
+.TP
+\fBvm_slice\fR [input_matrix] [output_matrix] [\fB-b\fR] [\fB-c\fR \fIcolumns\fR] [\fB-h\fR] [\fB-n\fR \fInotice_level\fR] [\fB-q\fR] [\fB-r\fR \fIrows\fR] [\fB-s\fR \fIrand_percent\fR \fIrest_file\fR] [\fB-t\fR] [\fB-z\fR \fImod_num\fR]
+.br
+.PD 2
+.PP
+Parameters with optional arguments should be placed after manditory commandline arguments.
+.PD 2
+.SH DESCRIPTION
+.PD 1
+Perform matrix slicing. The input file and output file are optional. If only one is specified, it is assumed to be the input file. If the input file or output file not specified, STDIN or STDOUT is used to allow for piping.
+.PD 2
+.SH PARAMETERS
+.PD 1
+.TP
+\fB-b\fR
+Output the matix in binary format.
+.TP
+\fB-c\fR \fIcolumns\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Only output a selected set of \fIcolumns\fR specified in the string.
+.TP
+\fB-h\fR
+Print out the man page for help
+.TP
+\fB-n\fR \fInotice_level\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Set the degree of program output.  Use: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR  0	No output
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 10	Normal program output
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 20	Parameters useful for reproducing the results
+.PD 0
+.PP
+.PD 1
+	\fB-n\fR 30	All output
+.TP
+\fB-q\fR
+Transpose the matrix.
+.TP
+\fB-r\fR \fIrows\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Only output a selected set \fIrows\fR specified in the string.
+.TP
+\fB-s\fR \fIrand_percent\fR \fIrest_file\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Output a random subset of \fIrows\fR. \fIrand_percent\fR is the fraction of the matrix to output and must be between 0 and 1. The random selection is taken after any other slicing. If \fIrest_file\fR is not NO_OUTPUT, the remaining slice is output to the specified filename.
+.TP
+\fB-t\fR
+Output the matix in 'pretty' format.
+.TP
+\fB-z\fR \fImod_num\fR
+.PD 0
+.TP
+.PP
+.PD 1
+Reorder the matrix \fIrows\fR using the supplied modulus number. For a \fImod_num\fR of 3, the first row in the new matrix is 0, followed by 3, 6, 9, ..., 1, 4, 7, ...
+.PD 2
+.SH MATRIX FILE FORMATS
+.PD 1
+Five file formats are available for matrix and vector I/O depending on the type of matrix and format: full, symmetric, sparse, diagonal, pretty, and binary format.
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for the full matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMat \fI<\fIrows\fR> <\fIcolumns\fR>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col1>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col_n>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col2>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for a symmetric matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatSym \fI<\fIrows\fR>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col3>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+for the lower triangle. The format for a diagonal matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatDiag \fI<\fIrows\fR>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row1, col1>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row2, col2>
+.PD 0
+.PP
+.PD 1
+\fI	<data at row3, col3>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+for the diagonal. The format for a sparse matrix is: 
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+	VecMatSparse \fI<\fIrows\fR> <\fIcolumns\fR>
+.PD 0
+.PP
+.PD 1
+\fI	<col_number*\fIrows\fR+row_number> <value>
+.PD 0
+.PP
+.PD 1
+\fI	<col_number*\fIrows\fR+row_number> <value>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+	END
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+The format for a pretty file is:
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+\fI	<data row1, col1> <data row1, col2> ... <data row1,col_n>
+.PD 0
+.PP
+.PD 1
+\fI	<data row2, col1> <data row2, col2> ... <data row2,col_n>
+.PD 0
+.PP
+.PD 1
+\fI	...
+.PD 0
+.PP
+.PD 1
+Binary files can also be loaded and saved, but are not architecture independent.
+.PD 0
+.PP
+.PD 1
+
+.PD 0
+.PP
+.PD 1
+
+.PD 2
+.SH AUTHORS
+.PD 1
+W. Michael Brown

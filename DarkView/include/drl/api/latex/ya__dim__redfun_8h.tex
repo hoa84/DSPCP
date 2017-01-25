@@ -1,0 +1,129 @@
+\hypertarget{ya__dim__redfun_8h}{
+\section{/tmp/drl/cpp/math/dimred/ya\_\-dim\_\-redfun.h File Reference}
+\label{ya__dim__redfun_8h}\index{/tmp/drl/cpp/math/dimred/ya_dim_redfun.h@{/tmp/drl/cpp/math/dimred/ya\_\-dim\_\-redfun.h}}
+}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ YALANAMESPACE void \hyperlink{ya__dim__redfun_8h_a0}{point\_\-pca} (const YA\_\-Base\-T \&input, const ya\_\-sizet k, Eigen\-Options \&eigopts, ya\_\-type2 \&output, const int verbose)
+\begin{CompactList}\small\item\em Return a n x d matrix of residual variances for n points from PCA. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2, class ya\_\-type3$>$ void \hyperlink{ya__dim__redfun_8h_a1}{point\_\-pca} (const YA\_\-Base\-T \&input, const ya\_\-sizet k, const ya\_\-type2 \&dims, Eigen\-Options \&eigopts, ya\_\-type3 \&output, const int verbose)
+\begin{CompactList}\small\item\em Return a n x d matrix of residual variances for n points from PCA. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void \hyperlink{ya__dim__redfun_8h_a2}{point\_\-pca\_\-ep} (const YA\_\-Base\-T \&input, const eltype epsilon, Eigen\-Options \&eigopts, ya\_\-type2 \&output, const int verbose)
+\begin{CompactList}\small\item\em Same as point\_\-pca except epsilon nearest neighbors is used. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2, class ya\_\-type3$>$ void \hyperlink{ya__dim__redfun_8h_a3}{point\_\-pca\_\-ep} (const YA\_\-Base\-T \&input, const eltype epsilon, const ya\_\-type2 \&dims, Eigen\-Options \&eigopts, ya\_\-type3 \&output, const int verbose)
+\begin{CompactList}\small\item\em Same as point\_\-pca except epsilon nearest neighbors is used. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type$>$ void \hyperlink{ya__dim__redfun_8h_a4}{point\_\-pca} (const YA\_\-Base\-T \&input, const ya\_\-sizet k, Eigen\-Options \&eigopts, YA\_\-Row\-D \&vmean, YA\_\-Row\-D \&vmin, YA\_\-Row\-D \&vmax, YA\_\-Row\-D \&vstd, const int verbose)
+\begin{CompactList}\small\item\em Return statistics of residual variances for n points from PCA. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void \hyperlink{ya__dim__redfun_8h_a5}{point\_\-pca} (const YA\_\-Base\-T \&input, const ya\_\-sizet k, const ya\_\-type2 \&dims, Eigen\-Options \&eigopts, YA\_\-Row\-D \&vmean, YA\_\-Row\-D \&vmin, YA\_\-Row\-D \&vmax, YA\_\-Row\-D \&vstd, const int verbose)
+\begin{CompactList}\small\item\em Return statistics of residual variances for n points from PCA. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type$>$ void \hyperlink{ya__dim__redfun_8h_a6}{point\_\-pca\_\-ep} (const YA\_\-Base\-T \&input, const eltype epsilon, Eigen\-Options \&eigopts, YA\_\-Row\-D \&vmean, YA\_\-Row\-D \&vmin, YA\_\-Row\-D \&vmax, YA\_\-Row\-D \&vstd, const int verbose)
+\begin{CompactList}\small\item\em Same as point\_\-pca except epsilon nearest neighbors is used. \item\end{CompactList}\item 
+template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void \hyperlink{ya__dim__redfun_8h_a7}{point\_\-pca\_\-ep} (const YA\_\-Base\-T \&input, const eltype epsilon, const ya\_\-type2 \&dims, Eigen\-Options \&eigopts, YA\_\-Row\-D \&vmean, YA\_\-Row\-D \&vmin, YA\_\-Row\-D \&vmax, YA\_\-Row\-D \&vstd, const int verbose)
+\begin{CompactList}\small\item\em Same as point\_\-pca except epsilon nearest neighbors is used. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{ya__dim__redfun_8h_a5}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca@{point\_\-pca}}
+\index{point_pca@{point\_\-pca}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void point\_\-pca (const YA\_\-Base\-T \& {\em input}, const ya\_\-sizet {\em k}, const ya\_\-type2 \& {\em dims}, Eigen\-Options \& {\em eigopts}, YA\_\-Row\-D \& {\em vmean}, YA\_\-Row\-D \& {\em vmin}, YA\_\-Row\-D \& {\em vmax}, YA\_\-Row\-D \& {\em vstd}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a5}
+
+
+Return statistics of residual variances for n points from PCA. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]n x d matrix of samples \item[{\em k}]Local PCA is performed on each point and its k nearest neighbors \item[{\em dims}]length D vector containing dimensions for statistics calculation \item[{\em vmean}]length D vector containing mean residual variance for each dim \item[{\em vmin}]length D vector containing min residual variance for each dim \item[{\em vmax}]length D vector containing max residual variance for each dim \item[{\em vstd}]length D vector containing std devation of residual variance \item[{\em verbose}]0 no output, 1 progress meter/timing, 2 also nbor stats $\ast$ \end{description}
+\end{Desc}
+\hypertarget{ya__dim__redfun_8h_a4}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca@{point\_\-pca}}
+\index{point_pca@{point\_\-pca}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type$>$ void point\_\-pca (const YA\_\-Base\-T \& {\em input}, const ya\_\-sizet {\em k}, Eigen\-Options \& {\em eigopts}, YA\_\-Row\-D \& {\em vmean}, YA\_\-Row\-D \& {\em vmin}, YA\_\-Row\-D \& {\em vmax}, YA\_\-Row\-D \& {\em vstd}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a4}
+
+
+Return statistics of residual variances for n points from PCA. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]n x d matrix of samples \item[{\em k}]Local PCA is performed on each point and its k nearest neighbors \item[{\em vmean}]length d vector containing mean residual variance for each dim \item[{\em vmin}]length d vector containing min residual variance for each dim \item[{\em vmax}]length d vector containing max residual variance for each dim \item[{\em vstd}]length d vector containing std devation of residual variance \item[{\em verbose}]0 no output, 1 progress meter/timing, 2 also nbor stats $\ast$ \end{description}
+\end{Desc}
+\hypertarget{ya__dim__redfun_8h_a1}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca@{point\_\-pca}}
+\index{point_pca@{point\_\-pca}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2, class ya\_\-type3$>$ void point\_\-pca (const YA\_\-Base\-T \& {\em input}, const ya\_\-sizet {\em k}, const ya\_\-type2 \& {\em dims}, Eigen\-Options \& {\em eigopts}, ya\_\-type3 \& {\em output}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a1}
+
+
+Return a n x d matrix of residual variances for n points from PCA. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em dims}]length D vector of dimensionalities to include in calculation \item[{\em input}]n x D matrix of samples \item[{\em k}]Local PCA is performed on each point and its k nearest neighbors \item[{\em output}]n x D matrix of residual variances \item[{\em verbose}]0 no output, 1 progress meter/timing, 2 also nbor stats $\ast$ \end{description}
+\end{Desc}
+\hypertarget{ya__dim__redfun_8h_a0}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca@{point\_\-pca}}
+\index{point_pca@{point\_\-pca}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ YALANAMESPACE void point\_\-pca (const YA\_\-Base\-T \& {\em input}, const ya\_\-sizet {\em k}, Eigen\-Options \& {\em eigopts}, ya\_\-type2 \& {\em output}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a0}
+
+
+Return a n x d matrix of residual variances for n points from PCA. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]n x d matrix of samples \item[{\em k}]Local PCA is performed on each point and its k nearest neighbors \item[{\em output}]n x d matrix of residual variances \item[{\em verbose}]0 no output, 1 progress meter/timing, 2 also nbor stats $\ast$ \end{description}
+\end{Desc}
+\hypertarget{ya__dim__redfun_8h_a7}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca_ep@{point\_\-pca\_\-ep}}
+\index{point_pca_ep@{point\_\-pca\_\-ep}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca\_\-ep]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void point\_\-pca\_\-ep (const YA\_\-Base\-T \& {\em input}, const eltype {\em epsilon}, const ya\_\-type2 \& {\em dims}, Eigen\-Options \& {\em eigopts}, YA\_\-Row\-D \& {\em vmean}, YA\_\-Row\-D \& {\em vmin}, YA\_\-Row\-D \& {\em vmax}, YA\_\-Row\-D \& {\em vstd}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a7}
+
+
+Same as point\_\-pca except epsilon nearest neighbors is used. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{ya__dim__redfun_8h_a5}{point\_\-pca} $\ast$ \end{Desc}
+\hypertarget{ya__dim__redfun_8h_a6}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca_ep@{point\_\-pca\_\-ep}}
+\index{point_pca_ep@{point\_\-pca\_\-ep}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca\_\-ep]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type$>$ void point\_\-pca\_\-ep (const YA\_\-Base\-T \& {\em input}, const eltype {\em epsilon}, Eigen\-Options \& {\em eigopts}, YA\_\-Row\-D \& {\em vmean}, YA\_\-Row\-D \& {\em vmin}, YA\_\-Row\-D \& {\em vmax}, YA\_\-Row\-D \& {\em vstd}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a6}
+
+
+Same as point\_\-pca except epsilon nearest neighbors is used. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{ya__dim__redfun_8h_a5}{point\_\-pca} $\ast$ \end{Desc}
+\hypertarget{ya__dim__redfun_8h_a3}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca_ep@{point\_\-pca\_\-ep}}
+\index{point_pca_ep@{point\_\-pca\_\-ep}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca\_\-ep]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2, class ya\_\-type3$>$ void point\_\-pca\_\-ep (const YA\_\-Base\-T \& {\em input}, const eltype {\em epsilon}, const ya\_\-type2 \& {\em dims}, Eigen\-Options \& {\em eigopts}, ya\_\-type3 \& {\em output}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a3}
+
+
+Same as point\_\-pca except epsilon nearest neighbors is used. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{ya__dim__redfun_8h_a5}{point\_\-pca} $\ast$ \end{Desc}
+\hypertarget{ya__dim__redfun_8h_a2}{
+\index{ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}!point_pca_ep@{point\_\-pca\_\-ep}}
+\index{point_pca_ep@{point\_\-pca\_\-ep}!ya_dim_redfun.h@{ya\_\-dim\_\-redfun.h}}
+\subsubsection[point\_\-pca\_\-ep]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype, class mat\_\-type, class ya\_\-type2$>$ void point\_\-pca\_\-ep (const YA\_\-Base\-T \& {\em input}, const eltype {\em epsilon}, Eigen\-Options \& {\em eigopts}, ya\_\-type2 \& {\em output}, const int {\em verbose})}}
+\label{ya__dim__redfun_8h_a2}
+
+
+Same as point\_\-pca except epsilon nearest neighbors is used. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{ya__dim__redfun_8h_a5}{point\_\-pca} $\ast$ \end{Desc}

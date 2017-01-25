@@ -1,0 +1,346 @@
+\hypertarget{class_y_a_a_t_e_reduce}{
+\section{YAATEReduce$<$ eltype $>$ Class Template Reference}
+\label{class_y_a_a_t_e_reduce}\index{YAATEReduce@{YAATEReduce}}
+}
+Dimensionality Reduction via the Auto\-Encoder.  
+
+
+{\tt \#include $<$ya\_\-ate\_\-reduce.h$>$}
+
+Inheritance diagram for YAATEReduce$<$ eltype $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_y_a_a_t_e_reduce}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_y_a_a_t_e_reduce_a1}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a1}{method\_\-name} () const }
+\label{class_y_a_a_t_e_reduce_a1}
+
+\begin{CompactList}\small\item\em Return the name of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a2}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a2}{method\_\-id} () const }
+\label{class_y_a_a_t_e_reduce_a2}
+
+\begin{CompactList}\small\item\em Return the id of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a3}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a3}{version} () const }
+\label{class_y_a_a_t_e_reduce_a3}
+
+\begin{CompactList}\small\item\em Return the version of the dimensionality reduction method. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a4}{
+void \hyperlink{class_y_a_a_t_e_reduce_a4}{set\_\-rng} (Math\-Random$<$ Math\-Mersenne\-Twister $>$ $\ast$\_\-rng)}
+\label{class_y_a_a_t_e_reduce_a4}
+
+\begin{CompactList}\small\item\em Set the random number generator to be used during training. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_a_t_e_reduce_a5}{find} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples. \item\end{CompactList}\item 
+int \hyperlink{class_y_a_a_t_e_reduce_a6}{find} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&test, YA\_\-Mat\-T \&output, ya\_\-sizet dim, Eigen\-Options \&eigopts)
+\begin{CompactList}\small\item\em Find the map for reduction based on initial samples with specific test. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a7}{
+void \hyperlink{class_y_a_a_t_e_reduce_a7}{forward} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_a_t_e_reduce_a7}
+
+\begin{CompactList}\small\item\em Map in the forward direction to reduce the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a8}{
+void \hyperlink{class_y_a_a_t_e_reduce_a8}{reverse} (const YA\_\-Mat\-T \&input, YA\_\-Mat\-T \&output) const }
+\label{class_y_a_a_t_e_reduce_a8}
+
+\begin{CompactList}\small\item\em Map in the reverse direction to increase the dimensionality of a matrix. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a9}{
+void \hyperlink{class_y_a_a_t_e_reduce_a9}{save\_\-map} (ostream \&out) const }
+\label{class_y_a_a_t_e_reduce_a9}
+
+\begin{CompactList}\small\item\em Save a map to the given stream. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a10}{
+int \hyperlink{class_y_a_a_t_e_reduce_a10}{load\_\-map} (istream \&in)}
+\label{class_y_a_a_t_e_reduce_a10}
+
+\begin{CompactList}\small\item\em Load a map from the given stream. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void \hyperlink{class_y_a_a_t_e_reduce_a11}{train} (const vm\_\-type \&all\_\-data, const ya\_\-type2 \&layers, ya\_\-type3 \&RBM\_\-error, ya\_\-type4 \&BP\_\-error)
+\begin{CompactList}\small\item\em Train the Auto\-Encoder using a random split of the data into train/test. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4, class vm\_\-type5$>$ void \hyperlink{class_y_a_a_t_e_reduce_a12}{train} (const vm\_\-type \&train\_\-data, const ya\_\-type2 \&test\_\-data, const ya\_\-type3 \&layers, ya\_\-type4 \&RBM\_\-error, vm\_\-type5 \&BP\_\-error)
+\begin{CompactList}\small\item\em Train the Auto\-Encoder using specified training and testing data. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4, class vm\_\-type5$>$ void \hyperlink{class_y_a_a_t_e_reduce_a13}{train} (const vm\_\-type \&train\_\-data, const ya\_\-type2 \&test\_\-data, const ya\_\-type3 \&layers, const YA\_\-Mat$<$ \hyperlink{struct_y_a_a_t_e_reduce_1_1conv__parms}{conv\_\-parms} $>$ \&epsilon, ya\_\-type4 \&RBM\_\-error, vm\_\-type5 \&BP\_\-error)
+\begin{CompactList}\small\item\em Train the Auto\-Encoder using specified training/testing data and epsilon. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ void \hyperlink{class_y_a_a_t_e_reduce_a14}{forward\_\-map} (const vm\_\-type \&input, ya\_\-type2 \&output) const 
+\begin{CompactList}\small\item\em Forward map. \item\end{CompactList}\item 
+template$<$class vm\_\-type, class ya\_\-type2$>$ void \hyperlink{class_y_a_a_t_e_reduce_a15}{reverse\_\-map} (const vm\_\-type \&input, ya\_\-type2 \&output) const 
+\begin{CompactList}\small\item\em Inverse map. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a16}{
+double \hyperlink{class_y_a_a_t_e_reduce_a16}{train\_\-split} () const }
+\label{class_y_a_a_t_e_reduce_a16}
+
+\begin{CompactList}\small\item\em percentage of data set that will become training set \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a17}{
+void \hyperlink{class_y_a_a_t_e_reduce_a17}{train\_\-split} (double i)}
+\label{class_y_a_a_t_e_reduce_a17}
+
+\begin{CompactList}\small\item\em set percentage of data set that will become training set \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a18}{
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a18}{rbm\_\-iters} () const }
+\label{class_y_a_a_t_e_reduce_a18}
+
+\begin{CompactList}\small\item\em number of iterations for RBM training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a19}{
+void \hyperlink{class_y_a_a_t_e_reduce_a19}{rbm\_\-iters} (ya\_\-sizet i)}
+\label{class_y_a_a_t_e_reduce_a19}
+
+\begin{CompactList}\small\item\em set number of iterations for RBM training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a20}{
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a20}{bp\_\-iters} () const }
+\label{class_y_a_a_t_e_reduce_a20}
+
+\begin{CompactList}\small\item\em number of iterations for back propagation training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a21}{
+void \hyperlink{class_y_a_a_t_e_reduce_a21}{bp\_\-iters} (ya\_\-sizet i)}
+\label{class_y_a_a_t_e_reduce_a21}
+
+\begin{CompactList}\small\item\em set number of iterations for back propagation training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a22}{
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a22}{rbm\_\-size} () const }
+\label{class_y_a_a_t_e_reduce_a22}
+
+\begin{CompactList}\small\item\em desired batch sizes for RBM training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a23}{
+void \hyperlink{class_y_a_a_t_e_reduce_a23}{rbm\_\-size} (ya\_\-sizet i)}
+\label{class_y_a_a_t_e_reduce_a23}
+
+\begin{CompactList}\small\item\em set desired batch sizes for RBM training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a24}{
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a24}{bp\_\-size} () const }
+\label{class_y_a_a_t_e_reduce_a24}
+
+\begin{CompactList}\small\item\em desired batch sizes for BP training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a25}{
+void \hyperlink{class_y_a_a_t_e_reduce_a25}{bp\_\-size} (ya\_\-sizet i)}
+\label{class_y_a_a_t_e_reduce_a25}
+
+\begin{CompactList}\small\item\em set desired batch sizes for BP training \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a26}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a26}{logistic\_\-conv} () const }
+\label{class_y_a_a_t_e_reduce_a26}
+
+\begin{CompactList}\small\item\em RBM optimization parameters for logistic and linear units. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a27}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a27}{logistic\_\-momentum} () const }
+\label{class_y_a_a_t_e_reduce_a27}
+
+\begin{CompactList}\small\item\em RBM optimization parameters for logistic and linear units. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a28}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a28}{linear\_\-conv} () const }
+\label{class_y_a_a_t_e_reduce_a28}
+
+\begin{CompactList}\small\item\em RBM optimization parameters for logistic and linear units. \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a29}{
+const string \hyperlink{class_y_a_a_t_e_reduce_a29}{linear\_\-momentum} () const }
+\label{class_y_a_a_t_e_reduce_a29}
+
+\begin{CompactList}\small\item\em RBM optimization parameters for logistic and linear units. \item\end{CompactList}\item 
+double \hyperlink{class_y_a_a_t_e_reduce_a30}{momentum\_\-denom} () const 
+\begin{CompactList}\small\item\em optimization default for RBM (when to switch from initial to final momentum) \item\end{CompactList}\item 
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a31}{num\_\-ls} () const 
+\begin{CompactList}\small\item\em number of line searches for conjugate gradient optimization (see minimize) \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a32}{
+eltype \hyperlink{class_y_a_a_t_e_reduce_a32}{CG\_\-EPS} () const }
+\label{class_y_a_a_t_e_reduce_a32}
+
+\begin{CompactList}\small\item\em numerical constants for minimizer \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a33}{
+eltype \hyperlink{class_y_a_a_t_e_reduce_a33}{CG\_\-REALMIN} () const }
+\label{class_y_a_a_t_e_reduce_a33}
+
+\begin{CompactList}\small\item\em numerical constants for minimizer \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a34}{
+eltype \hyperlink{class_y_a_a_t_e_reduce_a34}{cg\_\-int} () const }
+\label{class_y_a_a_t_e_reduce_a34}
+
+\begin{CompactList}\small\item\em don't reevaluate within 0.1 of the limit of the current bracket \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a35}{
+eltype \hyperlink{class_y_a_a_t_e_reduce_a35}{cg\_\-ext} () const }
+\label{class_y_a_a_t_e_reduce_a35}
+
+\begin{CompactList}\small\item\em extrapolate maximum 3 times the current step-size \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a36}{
+ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce_a36}{cg\_\-max} () const }
+\label{class_y_a_a_t_e_reduce_a36}
+
+\begin{CompactList}\small\item\em maximum number of function evaluations per iteration for CG routine \item\end{CompactList}\item 
+\hypertarget{class_y_a_a_t_e_reduce_a37}{
+eltype \hyperlink{class_y_a_a_t_e_reduce_a37}{cg\_\-ratio} () const }
+\label{class_y_a_a_t_e_reduce_a37}
+
+\begin{CompactList}\small\item\em maximum allowed slope ratio \item\end{CompactList}\item 
+eltype \hyperlink{class_y_a_a_t_e_reduce_a38}{cg\_\-sig} () const 
+\begin{CompactList}\small\item\em SIG and RHO are the constants controlling the Wolfe-Powell conditions. \item\end{CompactList}\item 
+eltype \hyperlink{class_y_a_a_t_e_reduce_a39}{cg\_\-rho} () const 
+\begin{CompactList}\small\item\em SIG and RHO are the constants controlling the Wolfe-Powell conditions. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class eltype$>$ class YAATEReduce$<$ eltype $>$}
+
+Dimensionality Reduction via the Auto\-Encoder. 
+
+Autoencoder Formulation in C++ ------------------------------
+
+This implements an autoencoder for dimensionality reduction as described in:
+
+\begin{itemize}
+\item Hinton, G.E., and R.R. Salakhutdinov (2006). \char`\"{}Reducing the dimensionality of data with neural networks.\char`\"{} Science 313(5786): 504-507.\end{itemize}
+
+
+An Auto\-Encoder is given by a sequence of weight matrices, biases and unit functions. These parameters specify the encoder and the decoder which together make up the Auto\-Encoder. An Auto\-Encoder is specified by a sequence of integers n1-n2-n3-...-nd, where n1 is the input dimension, and n2-n3-...-nd are the dimensions of the intermediate maps, with nd representing the final (low dimensional) representation.
+
+Corresponding to the layers of the Auto\-Encoder we have weight matrices W1,...,W(2$\ast$d-2) and biases b1,...,b(2$\ast$d-2). The 1 to d-1 the weight matrices and biases specify the encoder and have dimensions as follows: W1 is n2xn1, b1 is n2x1, W2 is n3xn2, b2 is n3x1, etc.
+
+The encoder is assumed to have all logistic unit functions of the form 1/(1+exp(-x)) except for one linear unit function mapping n(d-1) -$>$ nd.
+
+If X is the n1 by N data matrix with points as columns then the first step of the forward map is given by (using matlab notation)
+
+1./(1+exp(-W1$\ast$X - repmat(b1,1,N))
+
+The full forward map is given by compositions of these functions, the last being linear of the form W(d-1)$\ast$X(d-1) + repmat(b(d-1),1,N), where W(d-1) and b(d-1) are the d-1 weight matrix and bias vector, respectively, and X(d-1) is the d-1 image of X under the previous logistic maps.
+
+Once we reach the ndxn(d-1) weight matrix W(d-1) and ndx1 bias b(d-1), we switch to the decoder, which is specified as follows: Wd is ndxn(d-1), bd is n(d-1), etc. The decoder doesn't have any linear maps. All maps are of the form
+
+1./(1+exp(-W(d)$\ast$Y - repmat(b(d),1,N)).
+
+The full Auto\-Encoder is the composition of all of the forward and inverse maps. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_y_a_a_t_e_reduce_a39}{
+\index{YAATEReduce@{YAATEReduce}!cg_rho@{cg\_\-rho}}
+\index{cg_rho@{cg\_\-rho}!YAATEReduce@{YAATEReduce}}
+\subsubsection[cg\_\-rho]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ eltype \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::cg\_\-rho () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a39}
+
+
+SIG and RHO are the constants controlling the Wolfe-Powell conditions. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_a_t_e_reduce_a38}{cg\_\-sig()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_a_t_e_reduce_a38}{
+\index{YAATEReduce@{YAATEReduce}!cg_sig@{cg\_\-sig}}
+\index{cg_sig@{cg\_\-sig}!YAATEReduce@{YAATEReduce}}
+\subsubsection[cg\_\-sig]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ eltype \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::cg\_\-sig () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a38}
+
+
+SIG and RHO are the constants controlling the Wolfe-Powell conditions. 
+
+SIG is the maximum allowed absolute ratio between previous and new slopes (derivatives in the search direction), thus setting SIG to low (positive) values forces higher precision in the line-searches. RHO is the minimum allowed fraction of the expected (from the slope at the initial point in the linesearch). Constants must satisfy 0 $<$ RHO $<$ SIG $<$ 1. Tuning of SIG (depending on the nature of the function to be optimized) may speed up the minimization; it is probably not worth playing much with RHO. $\ast$ \hypertarget{class_y_a_a_t_e_reduce_a6}{
+\index{YAATEReduce@{YAATEReduce}!find@{find}}
+\index{find@{find}!YAATEReduce@{YAATEReduce}}
+\subsubsection[find]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::find (const YA\_\-Mat\-T \& {\em input}, YA\_\-Mat\-T \& {\em test}, YA\_\-Mat\-T \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a6}
+
+
+Find the map for reduction based on initial samples with specific test. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Train Matrix of initial samples (columns are dimensions) \item[{\em test}]Test Matrix \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+\hypertarget{class_y_a_a_t_e_reduce_a5}{
+\index{YAATEReduce@{YAATEReduce}!find@{find}}
+\index{find@{find}!YAATEReduce@{YAATEReduce}}
+\subsubsection[find]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ int \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::find (const YA\_\-Mat\-T \& {\em input}, YA\_\-Mat\-T \& {\em output}, ya\_\-sizet {\em dim}, Eigen\-Options \& {\em eigopts})\hspace{0.3cm}{\tt  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a5}
+
+
+Find the map for reduction based on initial samples. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em input}]Matrix storing initial samples (columns are dimensions) \item[{\em output}]Matrix storing low-dimensioal coords of samples \item[{\em dim}]New dimensionality for output matrix $\ast$ \end{description}
+\end{Desc}
+
+
+Implements \hyperlink{class_y_a_dim_reduce_a8}{YADim\-Reduce$<$ eltype $>$}.\hypertarget{class_y_a_a_t_e_reduce_a14}{
+\index{YAATEReduce@{YAATEReduce}!forward_map@{forward\_\-map}}
+\index{forward_map@{forward\_\-map}!YAATEReduce@{YAATEReduce}}
+\subsubsection[forward\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ void \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::forward\_\-map (const vm\_\-type \& {\em input}, ya\_\-type2 \& {\em output}) const}}
+\label{class_y_a_a_t_e_reduce_a14}
+
+
+Forward map. 
+
+The forward map has all logistic units except for the final map, which is linear. $\ast$ \hypertarget{class_y_a_a_t_e_reduce_a30}{
+\index{YAATEReduce@{YAATEReduce}!momentum_denom@{momentum\_\-denom}}
+\index{momentum_denom@{momentum\_\-denom}!YAATEReduce@{YAATEReduce}}
+\subsubsection[momentum\_\-denom]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ double \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::momentum\_\-denom () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a30}
+
+
+optimization default for RBM (when to switch from initial to final momentum) 
+
+computed as number of iterations/MOMENTUM\_\-DENOM $\ast$ \hypertarget{class_y_a_a_t_e_reduce_a31}{
+\index{YAATEReduce@{YAATEReduce}!num_ls@{num\_\-ls}}
+\index{num_ls@{num\_\-ls}!YAATEReduce@{YAATEReduce}}
+\subsubsection[num\_\-ls]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ ya\_\-sizet \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::num\_\-ls () const\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_y_a_a_t_e_reduce_a31}
+
+
+number of line searches for conjugate gradient optimization (see minimize) 
+
+\begin{Desc}
+\item[Note:]must be $>$ 0. $\ast$ \end{Desc}
+\hypertarget{class_y_a_a_t_e_reduce_a15}{
+\index{YAATEReduce@{YAATEReduce}!reverse_map@{reverse\_\-map}}
+\index{reverse_map@{reverse\_\-map}!YAATEReduce@{YAATEReduce}}
+\subsubsection[reverse\_\-map]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2$>$ void \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::reverse\_\-map (const vm\_\-type \& {\em input}, ya\_\-type2 \& {\em output}) const}}
+\label{class_y_a_a_t_e_reduce_a15}
+
+
+Inverse map. 
+
+The inverse map has all logistic units. $\ast$ \hypertarget{class_y_a_a_t_e_reduce_a13}{
+\index{YAATEReduce@{YAATEReduce}!train@{train}}
+\index{train@{train}!YAATEReduce@{YAATEReduce}}
+\subsubsection[train]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4, class vm\_\-type5$>$ void \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::train (const vm\_\-type \& {\em train\_\-data}, const ya\_\-type2 \& {\em test\_\-data}, const ya\_\-type3 \& {\em layers}, const YA\_\-Mat$<$ \hyperlink{struct_y_a_a_t_e_reduce_1_1conv__parms}{conv\_\-parms} $>$ \& {\em epsilon}, ya\_\-type4 \& {\em RBM\_\-error}, vm\_\-type5 \& {\em BP\_\-error})}}
+\label{class_y_a_a_t_e_reduce_a13}
+
+
+Train the Auto\-Encoder using specified training/testing data and epsilon. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_a_t_e_reduce_a11}{train()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_a_t_e_reduce_a12}{
+\index{YAATEReduce@{YAATEReduce}!train@{train}}
+\index{train@{train}!YAATEReduce@{YAATEReduce}}
+\subsubsection[train]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4, class vm\_\-type5$>$ void \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::train (const vm\_\-type \& {\em train\_\-data}, const ya\_\-type2 \& {\em test\_\-data}, const ya\_\-type3 \& {\em layers}, ya\_\-type4 \& {\em RBM\_\-error}, vm\_\-type5 \& {\em BP\_\-error})}}
+\label{class_y_a_a_t_e_reduce_a12}
+
+
+Train the Auto\-Encoder using specified training and testing data. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{class_y_a_a_t_e_reduce_a11}{train()} $\ast$ \end{Desc}
+\hypertarget{class_y_a_a_t_e_reduce_a11}{
+\index{YAATEReduce@{YAATEReduce}!train@{train}}
+\index{train@{train}!YAATEReduce@{YAATEReduce}}
+\subsubsection[train]{\setlength{\rightskip}{0pt plus 5cm}template$<$class eltype$>$ template$<$class vm\_\-type, class ya\_\-type2, class ya\_\-type3, class ya\_\-type4$>$ void \hyperlink{class_y_a_a_t_e_reduce}{YAATEReduce}$<$ eltype $>$::train (const vm\_\-type \& {\em all\_\-data}, const ya\_\-type2 \& {\em layers}, ya\_\-type3 \& {\em RBM\_\-error}, ya\_\-type4 \& {\em BP\_\-error})}}
+\label{class_y_a_a_t_e_reduce_a11}
+
+
+Train the Auto\-Encoder using a random split of the data into train/test. 
+
+The data is split based on \hyperlink{class_y_a_a_t_e_reduce_a16}{train\_\-split()}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em all\_\-data}]data to be used for training and testing \item[{\em layers}]dimensionality of each layer to be used for mapping \item[{\em RBM\_\-error}]RBM Training Error. Rows are layers, columns iterations \item[{\em BP\_\-error}]BP Training Error. First row is train, second row test \end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+/tmp/drl/cpp/math/dimred/ya\_\-ate\_\-reduce.h\item 
+/tmp/drl/cpp/math/dimred/ya\_\-ate\_\-reduce.cpp\end{CompactItemize}
