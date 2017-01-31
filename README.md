@@ -1,5 +1,6 @@
-/*** DSPCP - Data Scalable Approach for Parallel Coordinates ***
- ***      Copyright (C) 2016 - Hoa Nguyen, Paul Rosen        ***/
+/*** DSPCP - Data Scalable Approach for Parallel Coordinates ***/
+
+/***      Copyright (C) 2016 - Hoa Nguyen, Paul Rosen        ***/
 
 /*** Running the code ***/
 DSPCP is built by using C++, OpenGL and Qt.
